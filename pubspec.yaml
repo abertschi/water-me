@@ -35,7 +35,6 @@ dependencies:
   path_provider:
   path:
   provider:
-  sqflite:
   shared_preferences:
   flutter_local_notifications:
   workmanager:

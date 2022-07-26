@@ -16,7 +16,6 @@ void callbackDispatcher() {
       }
     } catch (err) {
       print(err);
-      throw Exception(err);
     }
 
     return Future.value(true);

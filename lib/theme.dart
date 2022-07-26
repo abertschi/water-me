@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 Color c1_2 = Color.fromRGBO(49, 73, 60, 0.6);
-Color c1 = Color.fromRGBO(49, 73, 60, 1);
+Color c1 = Color.fromRGBO(49, 73, 60, 1); // 31493CFF
 
 Color c2 = Color.fromRGBO(49, 73, 60, 0.8);
 Color c3 = Color.fromRGBO(184, 12, 9, 1.0);
