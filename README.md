@@ -1,6 +1,11 @@
-# Water Me
+# Water Me 🪴
 
 > A simple and open plant watering reminder for Android.
+  
+
+<p align="left">
+    <img src="./assets/preview.png" alt="preview" width="800"/>
+</p>
 
 _Water me_ is a mobile application written in Flutter to  remind you to water your plants.
 
@@ -13,3 +18,4 @@ _Water me_ is a mobile application written in Flutter to  remind you to water yo
 - Flutter Provider package for MVC separation 
 
 Work in progress. Pull requests are welcome.
+
