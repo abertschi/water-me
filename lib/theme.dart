@@ -7,7 +7,11 @@ Color c2 = Color.fromRGBO(49, 73, 60, 0.8);
 Color c3 = Color.fromRGBO(184, 12, 9, 1.0);
 
 final appTheme = ThemeData(
-    primaryColor: c1, fontFamily: 'Raleway', scaffoldBackgroundColor: c1);
+    primaryColor: c1,
+    fontFamily: 'Raleway',
+    scrollbarTheme: ScrollbarThemeData().copyWith(
+      thumbColor: MaterialStateProperty.all(c2),
+    ));
 
 MaterialButton buttonTemplate(
     {required String text, required VoidCallback? onPressed}) {

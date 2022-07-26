@@ -15,10 +15,11 @@ class ShowPlant extends StatelessWidget {
     plant.waterNow();
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(milliseconds: 3000),
+        duration: const Duration(milliseconds: 5000),
         content: Text("Plant ${plant.plantName} watered."),
         action: SnackBarAction(
             label: "UNDO",
+            textColor: Colors.white,
             onPressed: () {
               plant.undoWatering();
             })));

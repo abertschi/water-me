@@ -18,6 +18,9 @@ class AppModel extends ChangeNotifier {
     return _plants;
   }
 
+  int plantsToWater() {
+    return _plants.where((p) => p.isWateringDue()).toList().length;
+  }
   bool isWateringDue() {
     for (var p in _plants) {
       if (p.isWateringDue()) {
@@ -41,6 +44,7 @@ class AppModel extends ChangeNotifier {
 
   void removePlant(PlantModel p) {
     _plants.remove(p);
+    notifyListeners();
     p.removeListener(notifyParent);
   }
 

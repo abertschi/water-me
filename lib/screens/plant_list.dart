@@ -13,7 +13,7 @@ class MyPlants extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final list = Container(
-        margin: const EdgeInsets.only(bottom: 0.0),
+        margin: const EdgeInsets.only(top: 0.0),
         // decoration: BoxDecoration(color: Color.fromRGBO(58, 66, 86, 1.0)),
         child: Consumer<AppModel>(
             builder: (BuildContext context, AppModel m, Widget? child) {
@@ -26,7 +26,6 @@ class MyPlants extends StatelessWidget {
                   value: m.plants[index],
                   builder: (c, child) {
                     var last = index == m.plants.length - 1;
-                    // XXX: Provider read plant model so we can rebuild on change
                     return PlantListEntry(lastEntry: last);
                   });
             },

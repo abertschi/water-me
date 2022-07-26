@@ -8,10 +8,10 @@ import '../models/app_model.dart';
 import '../models/plant_model.dart';
 
 class PlantListEntry extends StatelessWidget {
-  final cardHeight = 90.0;
+  final cardHeight = 100.0;
   final bool lastEntry;
 
-  PlantListEntry({this.lastEntry = false});
+  const PlantListEntry({this.lastEntry = false});
 
   onShowPlantDetails(BuildContext context, PlantModel plant) {
     Navigator.push(
@@ -26,10 +26,11 @@ class PlantListEntry extends StatelessWidget {
 
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(milliseconds: 3000),
+        duration: const Duration(milliseconds: 5000),
         content: Text("Plant ${plant.plantName} watered."),
         action: SnackBarAction(
             label: "UNDO",
+            textColor: Colors.white,
             onPressed: () {
               plant.undoWatering();
             })));

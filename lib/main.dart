@@ -1,59 +1,17 @@
 import 'dart:async';
 
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:water_me/models/app_model.dart';
 import 'package:water_me/screens/plant_list.dart';
-import 'package:water_me/services/db.dart';
-import 'package:water_me/services/notification.dart';
 import 'package:water_me/theme.dart';
 
-class AppContext {
-  Db db = Db();
-  AppModel? model;
-  CameraDescription? camera;
-  NotificationService? notifications;
-
-  init() async {
-    initModel();
-    initCamera();
-    initNotifications();
-  }
-
-  saveModel() async {
-    db.saveModel(model!);
-  }
-
-  initNotifications() async {
-    notifications = NotificationService();
-    notifications?.init();
-  }
-
-  initModel() async {
-    model = await db.loadModel();
-  }
-
-  initCamera() async {
-    try {
-      final cameras = await availableCameras();
-      camera = cameras.first;
-    } on Exception catch (_) {
-      print(_);
-    }
-  }
-}
+import 'app_context.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  print('c context');
   final AppContext c = AppContext();
-
-
-  await c.initModel();
-  c.initNotifications();
-  c.initCamera();
-
+  await c.init();
   runApp(MyApp(appContext: c));
 }
 

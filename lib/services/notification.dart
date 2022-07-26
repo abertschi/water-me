@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:water_me/main.dart';
 
 class NotificationService {
   static final NotificationService _notificationService =
@@ -8,14 +9,17 @@ class NotificationService {
     return _notificationService;
   }
 
+  bool _init = false;
   NotificationService._internal();
-
   static const channelId = '1';
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
   Future<void> init() async {
+    if (_init) return;
+
+    _init = true;
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('mipmap/ic_launcher');
     const InitializationSettings initializationSettings =
@@ -23,7 +27,7 @@ class NotificationService {
             android: initializationSettingsAndroid, iOS: null, macOS: null);
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: selectNotification);
+        onSelectNotification: showApp);
   }
 
   final AndroidNotificationDetails _androidNotificationDetails =
@@ -36,11 +40,12 @@ class NotificationService {
     importance: Importance.high,
   );
 
-  Future<void> showNotifications() async {
+  Future<void> showWateringNotification(int plantsToWater) async {
+
     await flutterLocalNotificationsPlugin.show(
       0,
-      "Water your plants",
-      "",
+      "Water me",
+      "You have $plantsToWater plants to water.",
       NotificationDetails(android: _androidNotificationDetails),
     );
   }
@@ -54,4 +59,6 @@ class NotificationService {
   }
 }
 
-Future selectNotification(String? payload) async {}
+Future showApp(String? payload) async {
+  main();
+}

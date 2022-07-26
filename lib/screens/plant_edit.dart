@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:water_me/models/plant_model.dart';
 import 'package:water_me/screens/take_picture.dart';
 
+import '../app_context.dart';
 import '../main.dart';
 import '../theme.dart';
 
@@ -72,7 +73,6 @@ class _EditPlant extends State<EditPlant> {
   onDelete(BuildContext context, PlantModel plant) async {
     var model = Provider.of<AppContext>(context, listen: false).model!;
     model.removePlant(plant);
-    Provider.of<AppContext>(context, listen: false).saveModel();
     Navigator.pop(context);
     Navigator.pop(context);
   }
