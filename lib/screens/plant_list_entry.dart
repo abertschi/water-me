@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:water_me/screens/plant_show.dart';
 
-import '../models/app_model.dart';
 import '../models/plant_model.dart';
 
 class PlantListEntry extends StatelessWidget {
-  final cardHeight = 100.0;
+  final cardHeight = 90.0;
   final bool lastEntry;
 
   const PlantListEntry({this.lastEntry = false});
