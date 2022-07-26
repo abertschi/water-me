@@ -15,7 +15,7 @@ _Water me_ is a mobile application written in Flutter to  remind you to water yo
 - (Currently) Support for Android
 - Camera access
 - Local Notifications
-- Periodic scheduling
+- Workmanager with periodic task
 - Flutter Provider package for MVC separation
 
 Work in progress. Pull requests are welcome.
