@@ -4,7 +4,7 @@
   
 
 <p align="left">
-    <img src="./assets/preview.png" alt="preview" width="800"/>
+    <img src="./assets/preview2.png" alt="preview" width="800"/>
 </p>
 
 _Water me_ is a mobile application written in Flutter to  remind you to water your plants.
@@ -17,5 +17,10 @@ _Water me_ is a mobile application written in Flutter to  remind you to water yo
 - Local Notifications
 - Workmanager with periodic task
 - Provider package for MVC separation
+  
+    
+Pull requests are welcome.
 
-Work in progress. Pull requests are welcome.
+#### About
+Andrin Bertschi  
+https://abertschi.ch
