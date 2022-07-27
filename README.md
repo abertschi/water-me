@@ -28,7 +28,7 @@ flutter build apk
 ```
 
 ### Install
-The latest version is automatically built on a new commit. See [Build APK action](https://github.com/abertschi/water-me/actions/workflows/build.yml]), select the latest successfull build, and download the APK under 'Artifacts'. Alternatively consider [Release Section](https://github.com/abertschi/water-me/releases).
+The latest version is automatically built on a new commit. See [Build APK Action](https://github.com/abertschi/water-me/actions/workflows/build.yml), select the latest successfull build, and download the APK under 'Artifacts'. Alternatively consider [Release Section](https://github.com/abertschi/water-me/releases).
 
 ### About
 Andrin Bertschi  
