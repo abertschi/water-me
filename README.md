@@ -1,10 +1,10 @@
 # Water Me 🪴
 
-> A simple and open plant watering reminder for Android.
+> A simple, open and privacy friendly plant watering reminder for Android.
   
 
 <p align="left">
-    <img src="./assets/preview.png" alt="preview" width="800"/>
+    <img src="./assets/preview2.png" alt="preview" width="800"/>
 </p>
 
 _Water me_ is a mobile application written in Flutter to  remind you to water your plants.
@@ -17,5 +17,19 @@ _Water me_ is a mobile application written in Flutter to  remind you to water yo
 - Local Notifications
 - Workmanager with periodic task
 - Provider package for MVC separation
+  
+    
+Pull requests are welcome.
 
-Work in progress. Pull requests are welcome.
+### Build
+This is flutter based Android application. Ensure to have Android-Studio and flutter-sdk installed.
+```
+flutter build apk
+```
+
+### Install
+The latest version is automatically built on a new commit. See [Build APK Action](https://github.com/abertschi/water-me/actions/workflows/build.yml), select the latest successfull build, and download the APK under 'Artifacts'. Alternatively consider [Release Section](https://github.com/abertschi/water-me/releases).
+
+### About
+Andrin Bertschi  
+https://abertschi.ch
