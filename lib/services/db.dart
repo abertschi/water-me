@@ -28,6 +28,7 @@ class Db {
     final prefs = await SharedPreferences.getInstance();
     var m = prefs.getString('model');
     if (m == null) {
+      print('app model is null');
       return AppModel();
     } else {
       return AppModel.fromJson(json.decode(m));
