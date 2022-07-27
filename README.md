@@ -21,6 +21,15 @@ _Water me_ is a mobile application written in Flutter to  remind you to water yo
     
 Pull requests are welcome.
 
+### Build
+This is flutter based Android application. Ensure to have Android-Studio and flutter-sdk installed.
+```
+flutter build apk
+```
+
+### Install
+The latest version is automatically built on a new commit. See [Build APK action](https://github.com/abertschi/water-me/actions/workflows/build.yml]), select the latest successfull build, and download the APK under 'Artifacts'. Alternatively consider [Release Section](https://github.com/abertschi/water-me/releases).
+
 ### About
 Andrin Bertschi  
 https://abertschi.ch
