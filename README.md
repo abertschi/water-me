@@ -2,6 +2,7 @@
 
 > A simple, open and privacy friendly plant watering reminder for Android.
   
+  [![Build APK](https://github.com/abertschi/water-me/actions/workflows/build.yml/badge.svg)](https://github.com/abertschi/water-me/actions/workflows/build.yml)
 
 <p align="left">
     <img src="./assets/preview2.png" alt="preview" width="800"/>
