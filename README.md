@@ -1,6 +1,6 @@
 # Water Me 🪴
 
-> A simple and open plant watering reminder for Android.
+> An open and privacy friendly plant watering reminder for Android.
   
 
 <p align="left">
