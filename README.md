@@ -21,6 +21,6 @@ _Water me_ is a mobile application written in Flutter to  remind you to water yo
     
 Pull requests are welcome.
 
-#### About
+### About
 Andrin Bertschi  
 https://abertschi.ch
