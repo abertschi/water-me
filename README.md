@@ -19,4 +19,3 @@ _Water me_ is a mobile application written in Flutter to  remind you to water yo
 - Provider package for MVC separation
 
 Work in progress. Pull requests are welcome.
-
