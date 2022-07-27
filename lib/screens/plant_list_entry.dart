@@ -55,7 +55,7 @@ class PlantListEntry extends StatelessWidget {
             height: cardHeight,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-                color: Color.fromRGBO(49, 73, 60, plant.hasImage ? 0.7 : 0.9)),
+                color: Color.fromRGBO(49, 73, 60, plant.hasImage ? 0.5 : 0.9)),
             child: Center(
               child: buildListTile(context, plant),
             ),

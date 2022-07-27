@@ -37,6 +37,9 @@ class AppContext {
 
   initModel() async {
     model = await db.loadModel();
+    model.addListener(() {
+      saveModel();
+    });
   }
 
   initCamera() async {

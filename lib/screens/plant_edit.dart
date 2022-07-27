@@ -25,6 +25,9 @@ class EditPlant extends StatefulWidget {
 class _EditPlant extends State<EditPlant> {
   late TextEditingController plantNameCtrl;
   late TextEditingController frequencyCtrl;
+  final formKey = GlobalKey<FormState>();
+  final roundedBorder =
+      OutlineInputBorder(borderSide: BorderSide(color: Colors.white));
 
   _EditPlant();
 
@@ -54,15 +57,21 @@ class _EditPlant extends State<EditPlant> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[body(context)],
-      ),
+      body: Form(
+          key: formKey,
+          child: Column(
+            children: <Widget>[body(context)],
+          )),
     );
   }
 
   onSave(BuildContext context, PlantModel plant) async {
-    var model = Provider.of<AppContext>(context, listen: false).model!;
+    if (!(formKey.currentState?.validate() ?? false)) {
+      // Validation errors
+      return;
+    }
 
+    var model = Provider.of<AppContext>(context, listen: false).model!;
     if (!model.plants.contains(plant)) {
       model.addPlant(plant);
     }
@@ -180,12 +189,19 @@ class _EditPlant extends State<EditPlant> {
             }
           },
           decoration: const InputDecoration(
-            labelText: "ENTER NAME",
-            fillColor: Colors.white,
+            errorStyle: TextStyle(color: Colors.white),
+            border:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+            focusedErrorBorder:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+            errorBorder:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
             enabledBorder:
                 OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
             focusedBorder:
                 OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+            labelText: "ENTER NAME",
+            fillColor: Colors.white,
             labelStyle: TextStyle(color: Colors.white, fontSize: 20.0),
           ),
           style: const TextStyle(color: Colors.white, fontSize: 20.0),
@@ -198,15 +214,28 @@ class _EditPlant extends State<EditPlant> {
           controller: frequencyCtrl,
           textAlign: TextAlign.left,
           keyboardType: TextInputType.number,
+          validator: (v) {
+            if (v == null || v.isEmpty) {
+              return "Can't be empty";
+            } else {
+              return null;
+            }
+          },
           decoration: const InputDecoration(
             fillColor: Colors.white,
             suffixText: "days ",
             labelText: "FREQUENCY",
             suffixStyle: TextStyle(color: Colors.white, fontSize: 20.0),
+            border:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+            focusedErrorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+            errorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
             enabledBorder:
-                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
             focusedBorder:
-                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
             labelStyle: TextStyle(color: Colors.white, fontSize: 20.0),
           ),
           style: const TextStyle(color: Colors.white, fontSize: 20.0),

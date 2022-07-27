@@ -16,7 +16,7 @@ class MyPlants extends StatelessWidget {
       child:
           Column(mainAxisAlignment: MainAxisAlignment.start, children: const [
         SizedBox(height: 100.0),
-        Icon(Icons.water_drop_outlined, color: Colors.white, size: 150),
+        Icon(Icons.water_drop_outlined, color: Color.fromRGBO(255, 255, 255, 1), size: 150),
         SizedBox(height: 30.0),
         Padding(
             padding: EdgeInsets.only(left: 50.0, right: 50.0),
@@ -24,7 +24,7 @@ class MyPlants extends StatelessWidget {
               "Nothing growing yet.",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.white,
+                  color: Color.fromRGBO(255, 255, 255, 0.8),
                   fontSize: 50.0,
                   fontWeight: FontWeight.w400),
             ))
