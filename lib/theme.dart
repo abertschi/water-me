@@ -6,9 +6,32 @@ Color c1 = Color.fromRGBO(49, 73, 60, 1); // 31493CFF
 Color c2 = Color.fromRGBO(49, 73, 60, 0.8);
 Color c3 = Color.fromRGBO(184, 12, 9, 1.0);
 
+var materialColor = MaterialColor(
+  c1.value,
+  <int, Color>{
+    50: c1,
+    100: c1,
+    200: c1,
+    300: c1,
+    400: c1,
+    500: c1,
+    600: c1,
+    700: c1,
+    800: c1,
+    900: c1,
+  },
+);
+
 final appTheme = ThemeData(
     primaryColor: c1,
     fontFamily: 'Raleway',
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: materialColor,
+      primaryColorDark: c1,
+      accentColor: c1,
+      backgroundColor: c1,
+      errorColor: Colors.white,
+    ),
     scaffoldBackgroundColor: c1,
     backgroundColor: c1);
 
