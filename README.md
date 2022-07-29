@@ -23,8 +23,9 @@ _Water me_ is a mobile application written in Flutter to  remind you to water yo
 Pull requests are welcome.
 
 ### Build
-This is flutter based Android application. Ensure to have Android-Studio and flutter-sdk installed.
+This is a flutter based Android application. Ensure to have Android-Studio and flutter-sdk installed.
 ```
+flutter pub get
 flutter build apk
 ```
 
