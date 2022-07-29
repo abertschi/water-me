@@ -1,3 +1,6 @@
+** 1.0.2+3 (unreleased)
+- Count days always at midnight
+
 ## 1.0.1+2
 - Fix bug to properly store model
 - UI sugar, input validation
