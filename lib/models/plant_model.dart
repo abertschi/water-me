@@ -20,10 +20,17 @@ class PlantModel extends ChangeNotifier {
   }
 
   int? daysSinceLastWatered() {
-    if (lastWatered() == null) return null;
+    var last = lastWatered();
+    if (last == null) return null;
     var now = DateTime.now();
-    var diff = now.difference(lastWatered()!).inDays;
+    var diff = _differenceBetweenDates(now, last).inDays;
     return diff;
+  }
+
+  Duration _differenceBetweenDates(DateTime d1, DateTime d2) {
+    var _d1 = DateTime(d1.year, d1.month, d1.day);
+    var _d2 = DateTime(d2.year, d2.month, d2.day);
+    return  _d1.difference(_d2);
   }
 
   int daysUntilNextWatering() {
@@ -32,7 +39,7 @@ class PlantModel extends ChangeNotifier {
       return 0;
     } else {
       var now = DateTime.now();
-      var diff = now.difference(last).inDays;
+      var diff = _differenceBetweenDates(now, last).inDays;
       return wateringFrequency - diff;
     }
   }
