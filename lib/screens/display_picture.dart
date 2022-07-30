@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import '../theme.dart';
 
 class DisplayPictureScreen extends StatelessWidget {
+  static const String routeName = "display_picture";
+
   final String imagePath;
 
   const DisplayPictureScreen({super.key, required this.imagePath});

@@ -8,6 +8,8 @@ import 'package:water_me/theme.dart';
 import '../models/app_model.dart';
 
 class MyPlants extends StatelessWidget {
+  static const String routeName = "plants";
+
   const MyPlants({super.key});
 
   Widget emptyList(BuildContext context) => Container(
@@ -59,6 +61,7 @@ class MyPlants extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
+                    settings: const RouteSettings(name: EditPlant.routeName),
                     builder: (context) => ChangeNotifierProvider.value(
                         value: p,
                         builder: (c, child) {

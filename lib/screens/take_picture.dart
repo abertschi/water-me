@@ -5,6 +5,8 @@ import '../theme.dart';
 import 'display_picture.dart';
 
 class TakePictureScreen extends StatefulWidget {
+  static const String routeName = "take_picture";
+
   const TakePictureScreen({
     super.key,
     required this.camera,
@@ -47,6 +49,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             if (!mounted) return;
             final res = await Navigator.of(context).push(
               MaterialPageRoute(
+                settings: const RouteSettings(name: DisplayPictureScreen.routeName),
                 builder: (context) => DisplayPictureScreen(
                   imagePath: image.path,
                 ),

@@ -9,6 +9,8 @@ import 'package:water_me/theme.dart';
 import 'plant_edit.dart';
 
 class ShowPlant extends StatelessWidget {
+  static const String routeName = "plant";
+
   const ShowPlant({super.key});
 
   void onWatering(BuildContext context, PlantModel plant) {
@@ -185,6 +187,7 @@ class ShowPlant extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
+                settings: const RouteSettings(name: EditPlant.routeName),
                 builder: (context) => ChangeNotifierProvider.value(
                     value: plant,
                     builder: (c, child) {

@@ -38,9 +38,9 @@ class _MyApp extends State<MyApp> with WidgetsBindingObserver {
       child: MaterialApp(
         title: 'Water me',
         theme: appTheme,
-        initialRoute: '/myplants',
+        initialRoute: '/plants',
         routes: <String, WidgetBuilder>{
-          '/myplants': (context) => MyPlants(),
+          '/plants': (context) => MyPlants()
         },
       ),
     );

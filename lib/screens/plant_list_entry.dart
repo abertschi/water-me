@@ -16,8 +16,9 @@ class PlantListEntry extends StatelessWidget {
     Navigator.push(
         context,
         MaterialPageRoute(
+            settings: const RouteSettings(name: ShowPlant.routeName),
             builder: (context) => ChangeNotifierProvider.value(
-                value: plant, builder: (c, child) => ShowPlant())));
+                value: plant, builder: (c, child) => const ShowPlant())));
   }
 
   Future<bool> onSwipe(BuildContext context, PlantModel plant) async {

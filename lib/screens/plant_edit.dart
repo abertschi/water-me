@@ -12,6 +12,8 @@ import '../theme.dart';
 enum EditMode { add, edit }
 
 class EditPlant extends StatefulWidget {
+  static const String routeName = "add_edit";
+
   final EditMode editMode;
 
   EditPlant({super.key, this.editMode = EditMode.edit});
@@ -90,7 +92,9 @@ class _EditPlant extends State<EditPlant> {
     var c = Provider.of<AppContext>(context, listen: false).camera!;
     final image = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => TakePictureScreen(camera: c)),
+      MaterialPageRoute(builder: (context) => TakePictureScreen(camera: c),
+        settings: const RouteSettings(name: TakePictureScreen.routeName),
+      ),
     );
     if (image != null && image is String) {
       plant.image = image;
@@ -177,7 +181,7 @@ class _EditPlant extends State<EditPlant> {
   }
 
   Widget enterName(BuildContext context) => Container(
-        margin: const EdgeInsets.only(left: 25.0, right: 25.0),
+        margin: const EdgeInsets.only(left: 20.0, right: 20.0),
         child: TextFormField(
           controller: plantNameCtrl,
           textAlign: TextAlign.left,
@@ -209,7 +213,7 @@ class _EditPlant extends State<EditPlant> {
       );
 
   Widget enterFrequency(BuildContext context) => Container(
-        margin: const EdgeInsets.only(left: 25.0, right: 25.0),
+        margin: const EdgeInsets.only(left: 20.0, right: 20.0),
         child: TextFormField(
           controller: frequencyCtrl,
           textAlign: TextAlign.left,
