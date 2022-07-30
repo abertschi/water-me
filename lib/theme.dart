@@ -35,13 +35,19 @@ final appTheme = ThemeData(
     scaffoldBackgroundColor: c1,
     backgroundColor: c1);
 
+
+
+double addEdit_logo_margin = 100;
+
 MaterialButton buttonTemplate(
     {required String text, required VoidCallback? onPressed}) {
   return MaterialButton(
       onPressed: onPressed,
       child: Container(
+        width: 600,
+        height: 60,
         margin: const EdgeInsets.only(left: 10.0, right: 10.0),
-        padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+        // padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
         decoration: BoxDecoration(
             border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.circular(5.0)),

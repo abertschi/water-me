@@ -37,7 +37,7 @@ class _EditPlant extends State<EditPlant> {
   void initState() {
     super.initState();
     final plant = Provider.of<PlantModel>(context, listen: false);
-    plantNameCtrl = TextEditingController(text: plant.plantName ?? "");
+    plantNameCtrl = TextEditingController(text: (plant.plantName.trim().isEmpty ? "  " : plant.plantName));
     plantNameCtrl.addListener(() {
       plant.plantName = plantNameCtrl.text;
     });
@@ -182,11 +182,14 @@ class _EditPlant extends State<EditPlant> {
 
   Widget enterName(BuildContext context) => Container(
         margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+        width: 600,
         child: TextFormField(
+          keyboardType: TextInputType.text,
+          textCapitalization: TextCapitalization.sentences,
           controller: plantNameCtrl,
           textAlign: TextAlign.left,
           validator: (v) {
-            if (v == null || v.isEmpty) {
+            if (v == null || v.trim().isEmpty) {
               return "Can't be empty";
             } else {
               return null;
@@ -213,6 +216,7 @@ class _EditPlant extends State<EditPlant> {
       );
 
   Widget enterFrequency(BuildContext context) => Container(
+        width: 600,
         margin: const EdgeInsets.only(left: 20.0, right: 20.0),
         child: TextFormField(
           controller: frequencyCtrl,
