@@ -20,7 +20,14 @@ _Water me_ is a mobile application written in Flutter to  remind you to water yo
 - Provider package for MVC separation
   
     
-Pull requests are welcome.
+Pull requests are welcome :heart:.
+
+#### Feature Ideas
+- Enable 'web' target to build a web app for ios/ web (needs a backend for notifications).
+- Integrate firebase to enable a group mode to sync plant state within a group of users
+- Add a 'note' field to a plant
+- Show watering history in plant detail screen.
+- Allow assignment of plants into groups, e.g. living room, office
 
 ### Build
 This is a flutter based Android application. Ensure to have Android-Studio and flutter-sdk installed.
