@@ -24,7 +24,7 @@ Pull requests are welcome :heart:.
 
 #### Feature Ideas
 - Enable 'web' target to build a web app for ios/ web (needs a backend for notifications).
-- Integrate firebase to enable a group mode to sync plant state within a group of users
+- Integrate firebase/ self hosted backend to enable a group mode to sync plant state within a group of users
 - Add a 'note' field to a plant
 - Show watering history in plant detail screen.
 - Allow assignment of plants into groups, e.g. living room, office
