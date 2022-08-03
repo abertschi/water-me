@@ -38,7 +38,8 @@ class AppModel extends ChangeNotifier {
 
   void notifyParent() {
     // XXX: We have to change UI logic in parent if a child changes,
-    // so parent is interested in changes of child
+    // so parent is interested in changes of child,
+    // this is relevant for sort ordering of plant list
     notifyListeners();
   }
 
@@ -52,7 +53,7 @@ class AppModel extends ChangeNotifier {
     AppModel model = AppModel();
     var plants = List<Map<String, dynamic>>.from(json['plants']);
     for (var plantMap in plants) {
-      model.plants.add(PlantModel.fromJson(plantMap));
+      model.addPlant(PlantModel.fromJson(plantMap));
     }
     return model;
   }
