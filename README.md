@@ -36,6 +36,8 @@ flutter pub get
 flutter build apk
 ```
 
+The entire build process in captured in scripts/build.sh.
+
 ### Install
 Download the APK in the [Release section](https://github.com/abertschi/water-me/releases). Alternatively, download the artifact of the latest commit from the [build APK action](https://github.com/abertschi/water-me/actions/workflows/build.yml) (select latest successfull build, and download the APK under 'Artifacts'. This requires a Github Account).
 
