@@ -1,0 +1,11 @@
+## 1.0.2+3
+- Count days always at midnight
+
+## 1.0.1+2
+- Fix bug to properly store model
+- UI sugar, input validation
+- Github runner to build APK
+
+## 1.0.0+1
+- Initial release, base functionality
+- Plant list, detail-, edit-, add- plant view
