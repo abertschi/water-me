@@ -37,7 +37,7 @@ flutter build apk
 ```
 
 ### Install
-Download the APK in the [Release Section](https://github.com/abertschi/water-me/releases). Alternatively, download the artifact of the latest commit from the [Build APK Action](https://github.com/abertschi/water-me/actions/workflows/build.yml) (select latest successfull build, and download the APK under 'Artifacts'. This requires a Github Account).
+Download the APK in the [Release section](https://github.com/abertschi/water-me/releases). Alternatively, download the artifact of the latest commit from the [build APK action](https://github.com/abertschi/water-me/actions/workflows/build.yml) (select latest successfull build, and download the APK under 'Artifacts'. This requires a Github Account).
 
 ### License
 GPL v3
