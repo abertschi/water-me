@@ -1,3 +1,7 @@
+## 1.0.5+5
+- Remove permissions from being auto merged into manifest: ACCESS_NETWORK_STATE, RECORD_AUDIO
+- input validation and eye candy
+
 ## 1.0.4+4
 - Introduce fdroid release
 
