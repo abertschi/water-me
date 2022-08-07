@@ -36,7 +36,8 @@ class ShowPlant extends StatelessWidget {
         color: Color.fromRGBO(243, 243, 243, 1.0),
         fontSize: 25.0);
 
-    final topText = SingleChildScrollView(child: Column(
+    final topText = SingleChildScrollView(
+        child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 90.0),
@@ -60,7 +61,6 @@ class ShowPlant extends StatelessWidget {
         const SizedBox(height: 20.0),
         Padding(
           padding: const EdgeInsets.only(left: 10.0),
-          //child: buildFrequencyInfo(context)),
           child: Row(children: [
             const Text(
               "water ",
@@ -80,32 +80,9 @@ class ShowPlant extends StatelessWidget {
           ]),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 10.0, top: 20.0),
-          //child: buildFrequencyInfo(context)),
-          child: Row(
-            children: [
-              const Text(
-                "watered ",
-                style: descTextSize,
-              ),
-              Container(
-                padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                // padding: const EdgeInsets.all(7.0),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(5.0)),
-                child: Text(
-                  "${plant.daysSinceLastWatered()} days",
-                  style: descTextBold,
-                ),
-              ),
-              const Text(
-                " ago",
-                style: descTextSize,
-              ),
-            ],
-          ),
-        ),
+            padding: const EdgeInsets.only(left: 10.0, top: 20.0),
+            child:
+                buildWateredText(context, plant, descTextSize, descTextBold)),
         const SizedBox(height: 20.0),
         const Padding(
             padding: EdgeInsets.only(left: 10.0),
@@ -119,10 +96,6 @@ class ShowPlant extends StatelessWidget {
             child: buttonTemplate(
                 text: "WATER NOW",
                 onPressed: () => onWatering(context, plant))),
-        // Expanded(
-        //   child: Align(
-        //       alignment: FractionalOffset.bottomCenter,
-        //       child:
       ],
     ));
 
@@ -174,6 +147,44 @@ class ShowPlant extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  buildWateredText(BuildContext context, PlantModel plant,
+      TextStyle descTextSize, TextStyle descTextBold) {
+    if (plant.daysSinceLastWatered() != null) {
+      return Row(
+        children: [
+          Text(
+            "watered ",
+            style: descTextSize,
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+            // padding: const EdgeInsets.all(7.0),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(5.0)),
+            child: Text(
+              "${plant.daysSinceLastWatered()} days",
+              style: descTextBold,
+            ),
+          ),
+          Text(
+            " ago",
+            style: descTextSize,
+          ),
+        ],
+      );
+    } else {
+      return Row(
+        children: [
+          Text(
+            "never watered yet",
+            style: descTextSize,
+          ),
+        ],
+      );
+    }
   }
 
   Widget buildOptionsButton(BuildContext context, PlantModel plant) {

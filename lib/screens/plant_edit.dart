@@ -26,8 +26,7 @@ class _EditPlant extends State<EditPlant> {
   late TextEditingController plantNameCtrl;
   late TextEditingController frequencyCtrl;
   final formKey = GlobalKey<FormState>();
-  final roundedBorder =
-      OutlineInputBorder(borderSide: BorderSide(color: Colors.white));
+  var roundedBorder = OutlineInputBorder(borderSide: BorderSide(color: Colors.white));
 
   _EditPlant();
 
@@ -181,28 +180,26 @@ class _EditPlant extends State<EditPlant> {
         child: TextFormField(
           controller: plantNameCtrl,
           textAlign: TextAlign.left,
+          keyboardType: TextInputType.name,
+          textCapitalization: TextCapitalization.sentences,
           validator: (v) {
-            if (v == null || v.isEmpty) {
+            if (v == null || v.trim().isEmpty) {
               return "Can't be empty";
             } else {
               return null;
             }
           },
-          decoration: const InputDecoration(
-            errorStyle: TextStyle(color: Colors.white),
-            border:
-                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            focusedErrorBorder:
-                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            errorBorder:
-                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            enabledBorder:
-                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            focusedBorder:
-                OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          decoration: InputDecoration(
             labelText: "ENTER NAME",
-            fillColor: Colors.white,
+            errorStyle: TextStyle(color: Colors.white),
+            suffixStyle: TextStyle(color: Colors.white, fontSize: 20.0),
             labelStyle: TextStyle(color: Colors.white, fontSize: 20.0),
+            border: roundedBorder,
+            focusedErrorBorder: roundedBorder,
+            errorBorder: roundedBorder,
+            enabledBorder: roundedBorder,
+            focusedBorder: roundedBorder,
+            fillColor: Colors.white,
           ),
           style: const TextStyle(color: Colors.white, fontSize: 20.0),
         ),
@@ -218,25 +215,26 @@ class _EditPlant extends State<EditPlant> {
             if (v == null || v.isEmpty) {
               return "Can't be empty";
             } else {
-              return null;
+              var num = int.tryParse(v);
+              if (num == null || num <= 0) {
+                return "Must be a positive number";
+              } else {
+                return null;
+              }
             }
           },
-          decoration: const InputDecoration(
-            fillColor: Colors.white,
+          decoration: InputDecoration(
             suffixText: "days ",
             labelText: "FREQUENCY",
+            errorStyle: TextStyle(color: Colors.white),
             suffixStyle: TextStyle(color: Colors.white, fontSize: 20.0),
-            border:
-            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            focusedErrorBorder:
-            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            errorBorder:
-            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            enabledBorder:
-            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            focusedBorder:
-            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
             labelStyle: TextStyle(color: Colors.white, fontSize: 20.0),
+            border: roundedBorder,
+            focusedErrorBorder: roundedBorder,
+            errorBorder: roundedBorder,
+            enabledBorder: roundedBorder,
+            focusedBorder: roundedBorder,
+            fillColor: Colors.white,
           ),
           style: const TextStyle(color: Colors.white, fontSize: 20.0),
         ),
