@@ -44,12 +44,6 @@ Download the APK in the [Release section](https://github.com/abertschi/water-me/
 ### License
 GPL v3
 
-### FAQ
-- Android: Why are permissions RECORD_AUDIO and ACCESS_NETWORK_STATE needed?  
-Please see comment on fdroid: https://gitlab.com/fdroid/fdroiddata/-/merge_requests/11520#note_1053050355
-
-
-
 ### About
 Built with <3   
 by Andrin Bertschi  
