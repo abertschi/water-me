@@ -26,6 +26,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     _controller = CameraController(
       widget.camera,
       ResolutionPreset.high,
+      enableAudio: false
     );
     _initializeControllerFuture = _controller.initialize();
   }
@@ -43,6 +44,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         onPressed: () async {
           try {
             await _initializeControllerFuture;
+
             final image = await _controller.takePicture();
             if (!mounted) return;
             final res = await Navigator.of(context).push(
