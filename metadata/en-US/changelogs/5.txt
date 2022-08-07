@@ -1,0 +1,18 @@
+## 1.0.5+5
+- Remove permissions from being auto merged into manifest: ACCESS_NETWORK_STATE, RECORD_AUDIO
+- input validation and eye candy
+
+## 1.0.4+4
+- Introduce fdroid release
+
+## 1.0.2+3
+- Count days always at midnight
+
+## 1.0.1+2
+- Fix bug to properly store model
+- UI sugar, input validation
+- Github runner to build APK
+
+## 1.0.0+1
+- Initial release, base functionality
+- Plant list, detail-, edit-, add- plant view
