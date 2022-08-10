@@ -41,7 +41,7 @@ The entire build process in captured in [scripts/build.sh](https://github.com/ab
 ### Feature and Contribution Ideas
 Pull requests are welcome :heart:.
 
-- [ ] A better logo :) #4
+- [ ] A better logo :) [#4](https://github.com/abertschi/water-me/issues/4)
 - [ ] Enable 'web' target to build a web app for ios/ web (needs a backend for notifications).
 - [ ] Integrate firebase/ self hosted backend to enable a group mode to sync plant state within a group of users
 - [ ] Add a 'note' field to a plant
