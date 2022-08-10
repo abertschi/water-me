@@ -36,10 +36,16 @@ flutter pub get
 flutter build apk
 ```
 
-The entire build process in captured in scripts/build.sh.
+The entire build process in captured in [scripts/build.sh](https://github.com/abertschi/water-me/blob/master/scripts/build.sh).
 
 ### Install
-Download the APK in the [Release section](https://github.com/abertschi/water-me/releases). Alternatively, download the artifact of the latest commit from the [build APK action](https://github.com/abertschi/water-me/actions/workflows/build.yml) (select latest successfull build, and download the APK under 'Artifacts'. This requires a Github Account).
+_Water Me_ is available on the [F-droid store](https://f-droid.org/packages/ch.abertschi.waterme.water_me) [(Metadata)](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/ch.abertschi.waterme.water_me.yml).
+
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+    alt="Get it on F-Droid"
+    height="80">](https://f-droid.org/packages/ch.abertschi.waterme.water_me)
+
+Alternatively, download released versions from the [release section](https://github.com/abertschi/water-me/releases) of this repository or the [continuous integration action](https://github.com/abertschi/water-me/actions/workflows/build.yml) for builds of the latest commits (requires a Github account).
 
 ### License
 GPL v3
