@@ -8,7 +8,7 @@
     <img src="./assets/preview2.png" alt="preview" width="800"/>
 </p>
 
-_Water me_ is a mobile application written in Flutter to  remind you to water your plants. No account, no sign up, no tracking.
+_Water me_ is a mobile application written in Flutter to  remind you to water your plants. No account, no sign-up, no tracking.
 
 ### Features and Components
 - Add plants with watering frequency, name and picture
