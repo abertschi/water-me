@@ -19,15 +19,15 @@ _Water me_ is a mobile application written in Flutter to  remind you to water yo
 - Workmanager with periodic task
 - Provider package for MVC separation
   
-    
-Pull requests are welcome :heart:.
+### Install
+_Water Me_ is available on the [F-droid store](https://f-droid.org/packages/ch.abertschi.waterme.water_me) [(Metadata)](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/ch.abertschi.waterme.water_me.yml).
 
-#### Feature Ideas
-- Enable 'web' target to build a web app for ios/ web (needs a backend for notifications).
-- Integrate firebase/ self hosted backend to enable a group mode to sync plant state within a group of users
-- Add a 'note' field to a plant
-- Show watering history in plant detail screen.
-- Allow assignment of plants into groups, e.g. living room, office
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+    alt="Get it on F-Droid"
+    height="80">](https://f-droid.org/packages/ch.abertschi.waterme.water_me)
+
+Alternatively, download released versions from the [release section](https://github.com/abertschi/water-me/releases) of this repository or the [continuous integration action](https://github.com/abertschi/water-me/actions/workflows/build.yml) for builds of the latest commits (requires a Github account).
+
 
 ### Build
 This is a flutter based Android application. Ensure to have Android-Studio and flutter-sdk installed.
@@ -37,15 +37,16 @@ flutter build apk
 ```
 
 The entire build process in captured in [scripts/build.sh](https://github.com/abertschi/water-me/blob/master/scripts/build.sh).
+ 
+### Feature and Contribution Ideas
+Pull requests are welcome :heart:.
 
-### Install
-_Water Me_ is available on the [F-droid store](https://f-droid.org/packages/ch.abertschi.waterme.water_me) [(Metadata)](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/ch.abertschi.waterme.water_me.yml).
-
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
-    alt="Get it on F-Droid"
-    height="80">](https://f-droid.org/packages/ch.abertschi.waterme.water_me)
-
-Alternatively, download released versions from the [release section](https://github.com/abertschi/water-me/releases) of this repository or the [continuous integration action](https://github.com/abertschi/water-me/actions/workflows/build.yml) for builds of the latest commits (requires a Github account).
+- [ ] A better logo :)
+- [ ] Enable 'web' target to build a web app for ios/ web (needs a backend for notifications).
+- [ ] Integrate firebase/ self hosted backend to enable a group mode to sync plant state within a group of users
+- [ ] Add a 'note' field to a plant
+- [ ] Show watering history in plant detail screen.
+- [ ] Allow assignment of plants into groups, e.g. living room, office
 
 ### License
 GPL v3
