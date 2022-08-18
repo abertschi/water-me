@@ -48,6 +48,8 @@ Pull requests are welcome :heart:.
 - [ ] Show watering history in plant detail screen.
 - [ ] Allow assignment of plants into groups, e.g. living room, office
 
+And [more ideas](https://github.com/abertschi/water-me/issues).
+
 ### License
 GPL v3
 
