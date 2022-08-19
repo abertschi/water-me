@@ -4,11 +4,13 @@ class PlantModel extends ChangeNotifier {
   List<DateTime> _wateringHistory = [];
   late String _plantName;
   late int _wateringFrequency;
+  late String _planetNote;
   String? _image;
 
-  PlantModel(String name, int wateringFreq) {
+  PlantModel(String name, int wateringFreq, String note) {
     _plantName = name;
     _wateringFrequency = wateringFreq;
+    _planetNote = note;
   }
 
   get hasImage {
@@ -30,7 +32,7 @@ class PlantModel extends ChangeNotifier {
   Duration _differenceBetweenDates(DateTime d1, DateTime d2) {
     var _d1 = DateTime(d1.year, d1.month, d1.day);
     var _d2 = DateTime(d2.year, d2.month, d2.day);
-    return  _d1.difference(_d2);
+    return _d1.difference(_d2);
   }
 
   int daysUntilNextWatering() {
@@ -42,6 +44,12 @@ class PlantModel extends ChangeNotifier {
       var diff = _differenceBetweenDates(now, last).inDays;
       return wateringFrequency - diff;
     }
+  }
+
+  String get planetNote => _planetNote;
+  set planetNote(String note) {
+    _planetNote = note;
+    notifyListeners();
   }
 
   String get plantName => _plantName;
@@ -90,9 +98,10 @@ class PlantModel extends ChangeNotifier {
   }
 
   static PlantModel fromJson(Map<String, dynamic> plantMap) {
-    PlantModel p = PlantModel("", 0);
+    PlantModel p = PlantModel("", 0, "");
     p.plantName = plantMap['name'] ?? '';
     p.wateringFrequency = plantMap['frequency'] ?? 7;
+    p.planetNote = plantMap['note'] ?? '';
     p.image = plantMap['image'] ?? '';
     var hist = List<String>.from(plantMap['watinergHistory'] ?? []);
     p.wateringHistory = hist.map((e) => DateTime.parse(e)).toList();
@@ -103,6 +112,7 @@ class PlantModel extends ChangeNotifier {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = plantName;
     data['frequency'] = wateringFrequency;
+    data['note'] = planetNote;
     data['image'] = image;
     data['watinergHistory'] = wateringHistory.map((e) => e.toString()).toList();
     return data;

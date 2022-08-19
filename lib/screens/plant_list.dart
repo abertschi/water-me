@@ -16,7 +16,8 @@ class MyPlants extends StatelessWidget {
       child:
           Column(mainAxisAlignment: MainAxisAlignment.start, children: const [
         SizedBox(height: 100.0),
-        Icon(Icons.water_drop_outlined, color: Color.fromRGBO(255, 255, 255, 1), size: 150),
+        Icon(Icons.water_drop_outlined,
+            color: Color.fromRGBO(255, 255, 255, 1), size: 150),
         SizedBox(height: 30.0),
         Padding(
             padding: EdgeInsets.only(left: 50.0, right: 50.0),
@@ -55,7 +56,7 @@ class MyPlants extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () async {
-              PlantModel p = PlantModel("", 0);
+              PlantModel p = PlantModel("", 0, "");
               Navigator.push(
                 context,
                 MaterialPageRoute(
