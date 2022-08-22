@@ -90,63 +90,7 @@ class ShowPlant extends StatelessWidget {
               color: Color.fromRGBO(255, 255, 255, 0.7607843137254902),
               thickness: 1.0,
             )),
-        //const SizedBox(height: 50.0),
-        Padding(
-          padding: const EdgeInsets.only(left: 10.0, top: 10.0),
-          child: Column(children: [
-            Row(
-              children: const [
-                Text(
-                  "Note",
-                  style: descTextSize,
-                ),
-              ],
-            ),
-            Container(
-              // padding: const EdgeInsets.all(7.0),
-              padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.red),
-                borderRadius: BorderRadius.circular(5.0),
-                color: Colors.red,
-              ),
-              child: Center(
-                child: Text(
-                  plant.planetNote == ""
-                      ? "add a note in Edite"
-                      : plant.planetNote,
-                  style: descTextBold,
-                ),
-              ),
-            ),
-
-            // Container(
-            //   padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-            //   // width: 200,
-            //   // height: 200,
-            //   decoration: BoxDecoration(
-            //     border: Border.all(
-            //       color: Colors.white,
-            //       width: 1.0,
-            //       style: BorderStyle.solid,
-            //     ),
-            //     borderRadius: BorderRadius.circular(20),
-            //     color: Colors.red,
-            //   ),
-
-            //   child: Text(
-            //     plant.planetNote,
-            //     style: descTextSize,
-            //   ),
-            // ),
-          ]),
-        ),
-        // const Padding(
-        //     padding: EdgeInsets.only(left: 10.0),
-        //     child: Divider(
-        //       color: Color.fromRGBO(255, 255, 255, 0.7607843137254902),
-        //       thickness: 1.0,
-        //     )),
+        buildPlantNote(context, plant, descTextSize, descTextBold),
         const SizedBox(
           height: 10.0,
         ),
@@ -170,7 +114,6 @@ class ShowPlant extends StatelessWidget {
             ),
           ));
     }
-
     return Stack(
       children: <Widget>[
         image,
@@ -243,6 +186,51 @@ class ShowPlant extends StatelessWidget {
           ),
         ],
       );
+    }
+  }
+
+  buildPlantNote(BuildContext context, PlantModel plant, TextStyle descTextSize,
+      TextStyle descTextBold) {
+    if (plant.plantNote != "") {
+      return Padding(
+        padding: const EdgeInsets.only(left: 10.0, top: 10.0),
+        child: Column(children: [
+          Row(
+            children: [
+              Text(
+                "Note",
+                style: descTextSize,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 5.0,
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.red),
+              borderRadius: BorderRadius.circular(5.0),
+              color: Colors.red,
+            ),
+            child: Center(
+              child: Text(
+                plant.plantNote,
+                style: descTextSize,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20.0,
+          ),
+          const Divider(
+            color: Color.fromRGBO(255, 255, 255, 0.7607843137254902),
+            thickness: 1.0,
+          )
+        ]),
+      );
+    } else {
+      return Container();
     }
   }
 

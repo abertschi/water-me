@@ -46,9 +46,10 @@ class _EditPlant extends State<EditPlant> {
     frequencyCtrl.addListener(() {
       plant.wateringFrequency = int.tryParse(frequencyCtrl.text) ?? 0;
     });
-    planetNoteCtr = TextEditingController(text: plant.planetNote);
+
+    planetNoteCtr = TextEditingController(text: plant.plantNote);
     planetNoteCtr.addListener(() {
-      plant.planetNote = planetNoteCtr.text;
+      plant.plantNote = planetNoteCtr.text;
     });
   }
 
@@ -137,10 +138,6 @@ class _EditPlant extends State<EditPlant> {
             text: "TAKE PICTURE",
             onPressed: () => onTakePicture(context, plant),
           ),
-          const SizedBox(height: 40.0),
-          // buttonTemplate(
-          //     text: "SAVE", onPressed: () => saveButton(context, plant)),
-          saveButton(context, plant),
           const SizedBox(height: 40.0),
           widget.editMode == EditMode.edit
               ? deleteButton(context, plant)
@@ -269,7 +266,7 @@ class _EditPlant extends State<EditPlant> {
             }
           },
           decoration: InputDecoration(
-            labelText: "note optional",
+            labelText: "NOTE OPTIONAL",
             errorStyle: const TextStyle(color: Colors.white),
             suffixStyle: const TextStyle(color: Colors.white, fontSize: 20.0),
             labelStyle: const TextStyle(color: Colors.white, fontSize: 20.0),
