@@ -21,7 +21,7 @@ class NotificationService {
 
     _init = true;
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('mipmap/ic_launcher');
+        AndroidInitializationSettings('drawable/ic_stat_nature');
     const InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid, iOS: null, macOS: null);
