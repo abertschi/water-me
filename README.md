@@ -4,6 +4,7 @@
   
   [![Build APK](https://github.com/abertschi/water-me/actions/workflows/build.yml/badge.svg)](https://github.com/abertschi/water-me/actions/workflows/build.yml)
    ![Made with Flutter](https://img.shields.io/badge/Made%20with-Flutter-1f425f.svg)
+   [![version](https://img.shields.io/github/v/tag/abertschi/water-me?label=latest%20version)](https://img.shields.io/github/v/tag/abertschi/water-me?label=latest%20version)
 <p align="left">
     <img src="./assets/preview2.png" alt="preview" width="800"/>
 </p>
