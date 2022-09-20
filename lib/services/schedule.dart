@@ -40,7 +40,7 @@ class ScheduleService {
     Workmanager().registerPeriodicTask(
       'periodic-task',
       'periodic-task',
-      frequency: Duration(hours: 12),
+      frequency: const Duration(hours: 12),
     );
   }
 }

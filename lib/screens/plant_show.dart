@@ -90,7 +90,10 @@ class ShowPlant extends StatelessWidget {
               color: Color.fromRGBO(255, 255, 255, 0.7607843137254902),
               thickness: 1.0,
             )),
-        const SizedBox(height: 50.0),
+        buildPlantNote(context, plant, descTextSize, descTextBold),
+        const SizedBox(
+          height: 10.0,
+        ),
         Padding(
             padding: const EdgeInsets.only(bottom: 100.0),
             child: buttonTemplate(
@@ -111,7 +114,6 @@ class ShowPlant extends StatelessWidget {
             ),
           ));
     }
-
     return Stack(
       children: <Widget>[
         image,
@@ -184,6 +186,51 @@ class ShowPlant extends StatelessWidget {
           ),
         ],
       );
+    }
+  }
+
+  buildPlantNote(BuildContext context, PlantModel plant, TextStyle descTextSize,
+      TextStyle descTextBold) {
+    if (plant.plantNote != "") {
+      return Padding(
+        padding: const EdgeInsets.only(left: 10.0, top: 10.0),
+        child: Column(children: [
+          Row(
+            children: [
+              Text(
+                "Note",
+                style: descTextSize,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 5.0,
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.red),
+              borderRadius: BorderRadius.circular(5.0),
+              color: Colors.red,
+            ),
+            child: Center(
+              child: Text(
+                plant.plantNote,
+                style: descTextSize,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20.0,
+          ),
+          const Divider(
+            color: Color.fromRGBO(255, 255, 255, 0.7607843137254902),
+            thickness: 1.0,
+          )
+        ]),
+      );
+    } else {
+      return Container();
     }
   }
 

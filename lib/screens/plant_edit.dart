@@ -25,8 +25,10 @@ class EditPlant extends StatefulWidget {
 class _EditPlant extends State<EditPlant> {
   late TextEditingController plantNameCtrl;
   late TextEditingController frequencyCtrl;
+  late TextEditingController planetNoteCtr;
   final formKey = GlobalKey<FormState>();
-  var roundedBorder = OutlineInputBorder(borderSide: BorderSide(color: Colors.white));
+  var roundedBorder =
+      OutlineInputBorder(borderSide: BorderSide(color: Colors.white));
 
   _EditPlant();
 
@@ -44,6 +46,11 @@ class _EditPlant extends State<EditPlant> {
     frequencyCtrl.addListener(() {
       plant.wateringFrequency = int.tryParse(frequencyCtrl.text) ?? 0;
     });
+
+    planetNoteCtr = TextEditingController(text: plant.plantNote);
+    planetNoteCtr.addListener(() {
+      plant.plantNote = planetNoteCtr.text;
+    });
   }
 
   @override
@@ -51,6 +58,7 @@ class _EditPlant extends State<EditPlant> {
     super.dispose();
     plantNameCtrl.dispose();
     frequencyCtrl.dispose();
+    planetNoteCtr.dispose();
   }
 
   @override
@@ -124,9 +132,12 @@ class _EditPlant extends State<EditPlant> {
           const SizedBox(height: 40.0),
           enterFrequency(context),
           const SizedBox(height: 40.0),
+          enterNote(context),
+          const SizedBox(height: 40.0),
           buttonTemplate(
-              text: "TAKE PICTURE",
-              onPressed: () => onTakePicture(context, plant)),
+            text: "TAKE PICTURE",
+            onPressed: () => onTakePicture(context, plant),
+          ),
           const SizedBox(height: 40.0),
           widget.editMode == EditMode.edit
               ? deleteButton(context, plant)
@@ -191,9 +202,9 @@ class _EditPlant extends State<EditPlant> {
           },
           decoration: InputDecoration(
             labelText: "ENTER NAME",
-            errorStyle: TextStyle(color: Colors.white),
-            suffixStyle: TextStyle(color: Colors.white, fontSize: 20.0),
-            labelStyle: TextStyle(color: Colors.white, fontSize: 20.0),
+            errorStyle: const TextStyle(color: Colors.white),
+            suffixStyle: const TextStyle(color: Colors.white, fontSize: 20.0),
+            labelStyle: const TextStyle(color: Colors.white, fontSize: 20.0),
             border: roundedBorder,
             focusedErrorBorder: roundedBorder,
             errorBorder: roundedBorder,
@@ -226,9 +237,39 @@ class _EditPlant extends State<EditPlant> {
           decoration: InputDecoration(
             suffixText: "days ",
             labelText: "FREQUENCY",
-            errorStyle: TextStyle(color: Colors.white),
-            suffixStyle: TextStyle(color: Colors.white, fontSize: 20.0),
-            labelStyle: TextStyle(color: Colors.white, fontSize: 20.0),
+            errorStyle: const TextStyle(color: Colors.white),
+            suffixStyle: const TextStyle(color: Colors.white, fontSize: 20.0),
+            labelStyle: const TextStyle(color: Colors.white, fontSize: 20.0),
+            border: roundedBorder,
+            focusedErrorBorder: roundedBorder,
+            errorBorder: roundedBorder,
+            enabledBorder: roundedBorder,
+            focusedBorder: roundedBorder,
+            fillColor: Colors.white,
+          ),
+          style: const TextStyle(color: Colors.white, fontSize: 20.0),
+        ),
+      );
+
+  Widget enterNote(BuildContext context) => Container(
+        margin: const EdgeInsets.only(left: 25.0, right: 25.0),
+        child: TextFormField(
+          controller: planetNoteCtr,
+          textAlign: TextAlign.left,
+          keyboardType: TextInputType.text,
+          textCapitalization: TextCapitalization.sentences,
+          validator: (v) {
+            if (v == null || v.trim().isEmpty) {
+              planetNoteCtr = "no Note Added" as TextEditingController;
+            } else {
+              return null;
+            }
+          },
+          decoration: InputDecoration(
+            labelText: "NOTE OPTIONAL",
+            errorStyle: const TextStyle(color: Colors.white),
+            suffixStyle: const TextStyle(color: Colors.white, fontSize: 20.0),
+            labelStyle: const TextStyle(color: Colors.white, fontSize: 20.0),
             border: roundedBorder,
             focusedErrorBorder: roundedBorder,
             errorBorder: roundedBorder,

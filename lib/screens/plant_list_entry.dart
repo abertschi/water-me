@@ -10,14 +10,14 @@ class PlantListEntry extends StatelessWidget {
   final cardHeight = 90.0;
   final bool lastEntry;
 
-  const PlantListEntry({this.lastEntry = false});
+  const PlantListEntry({super.key, this.lastEntry = false});
 
   onShowPlantDetails(BuildContext context, PlantModel plant) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => ChangeNotifierProvider.value(
-                value: plant, builder: (c, child) => ShowPlant())));
+                value: plant, builder: (c, child) => const ShowPlant())));
   }
 
   Future<bool> onSwipe(BuildContext context, PlantModel plant) async {
@@ -95,7 +95,7 @@ class PlantListEntry extends StatelessWidget {
             padding: const EdgeInsets.only(left: 0.0),
             child: Text(
               "${plant.daysUntilNextWatering()} days left",
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ]),
