@@ -29,29 +29,29 @@ class ShowPlant extends StatelessWidget {
     final plant = Provider.of<PlantModel>(context);
 
     const descTextSize =
-        TextStyle(color: Color.fromRGBO(243, 243, 243, 1.0), fontSize: 25.0);
+        TextStyle(color: Color.fromRGBO(243, 243, 243, 1.0), fontSize: 21.0);
 
     const descTextBold = TextStyle(
         fontWeight: FontWeight.bold,
         color: Color.fromRGBO(243, 243, 243, 1.0),
-        fontSize: 25.0);
+        fontSize: 21.0);
 
     final topText = SingleChildScrollView(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 90.0),
+        const SizedBox(height: 60.0),
         const Icon(
           Icons.water_drop_outlined,
           color: Colors.white,
-          size: 80.0,
+          size: 40.0,
         ),
-        const SizedBox(height: 50.0),
+        const SizedBox(height: 30.0),
         Text(
           plant.plantName,
-          style: const TextStyle(color: Colors.white, fontSize: 70.0),
+          style: const TextStyle(color: Colors.white, fontSize: 34.0),
         ),
-        const SizedBox(height: 50.0),
+        const SizedBox(height: 30.0),
         const Padding(
             padding: EdgeInsets.only(left: 10.0),
             child: Divider(
@@ -90,7 +90,7 @@ class ShowPlant extends StatelessWidget {
               color: Color.fromRGBO(255, 255, 255, 0.7607843137254902),
               thickness: 1.0,
             )),
-        const SizedBox(height: 50.0),
+        const SizedBox(height: 30.0),
         Padding(
             padding: const EdgeInsets.only(bottom: 100.0),
             child: buttonTemplate(
