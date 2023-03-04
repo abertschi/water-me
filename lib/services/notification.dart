@@ -10,7 +10,9 @@ class NotificationService {
   }
 
   bool _init = false;
+
   NotificationService._internal();
+
   static const channelId = '1';
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -34,14 +36,13 @@ class NotificationService {
       const AndroidNotificationDetails(
     '1',
     'water_me',
-    channelDescription: 'water notification',
+    'water notification',
     playSound: true,
     priority: Priority.high,
     importance: Importance.high,
   );
 
   Future<void> showWateringNotification(int plantsToWater) async {
-
     await flutterLocalNotificationsPlugin.show(
       0,
       "Water me",
