@@ -4,6 +4,7 @@
   
   [![Build APK](https://github.com/abertschi/water-me/actions/workflows/build.yml/badge.svg)](https://github.com/abertschi/water-me/actions/workflows/build.yml)
    ![Made with Flutter](https://img.shields.io/badge/Made%20with-Flutter-1f425f.svg)
+   [![version](https://img.shields.io/github/v/tag/abertschi/water-me?label=latest%20version)](https://img.shields.io/github/v/tag/abertschi/water-me?label=latest%20version)
 <p align="left">
     <img src="./assets/preview2.png" alt="preview" width="800"/>
 </p>
@@ -26,7 +27,7 @@ _Water Me_ is available on the [F-droid store](https://f-droid.org/packages/ch.a
     alt="Get it on F-Droid"
     height="80">](https://f-droid.org/packages/ch.abertschi.waterme.water_me)
 
-Alternatively, download released versions from the [release section](https://github.com/abertschi/water-me/releases) of this repository or the [continuous integration action](https://github.com/abertschi/water-me/actions/workflows/build.yml) for builds of the latest commits (requires a Github account).
+Alternatively, download snapshots from the [continuous integration action](https://github.com/abertschi/water-me/actions/workflows/build.yml) (requires a Github account, be aware that Github zips the apk on download, so unzip first).
 
 
 ### Build
