@@ -34,7 +34,7 @@ Alternatively, download snapshots from the [continuous integration action](https
 See [./CHANGELOG](./CHANGELOG) for a list of recent features.
 
 ### Need Help?
-See troupbleshooting guide for a list of common QnAs.
+See [troupbleshooting guide](./qna.md) for a list of common questions.
 
 ### Build
 This is a flutter based Android application. Ensure to have Android-Studio and flutter-sdk installed.
