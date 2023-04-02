@@ -43,7 +43,7 @@ class AppContext {
   }
 
   exportPath() {
-    return db.exportDbBackupPath;
+    return db.exportDbFilePath;
   }
 
   exportBackupPath() {
