@@ -39,6 +39,8 @@ dependencies:
   flutter_local_notifications:
   workmanager:
   loggy: ^2.0.1+1
+  external_path:
+  permission_handler:
 
 
   # The following adds the Cupertino Icons font to your application.
