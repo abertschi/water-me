@@ -7,6 +7,9 @@
             android:name="android.permission.RECORD_AUDIO"
             tools:node="remove" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <uses-permission
             android:name="android.permission.ACCESS_NETWORK_STATE"
             tools:node="remove" />
@@ -40,5 +43,10 @@
         <meta-data
                 android:name="flutterEmbedding"
                 android:value="2" />
+
+
+      <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+          android:exported="true">
+      </receiver>
     </application>
 </manifest>
