@@ -4,6 +4,7 @@
 - Camera no longer creates temporary files but stores plants to app directory.
 - Padding changes in plant details.
 - Drop support for landscape mode.
+- This version changes the model data. Add migration code to introduce a single group on import.
 
 ## 1.0.6+6
 - Fix issue on Android 7 with crash due to notification misconfig

@@ -79,9 +79,21 @@ class AppModel extends ChangeNotifier {
 
   static AppModel fromJson(Map<String, dynamic> json) {
     AppModel model = AppModel();
-    var groups = List<Map<String, dynamic>>.from(json['groups']);
-    for (var groupMap in groups) {
-      model.addGroup(GroupModel.fromJson(groupMap));
+    var version = json['version'] ?? '';
+
+    // XXX: in version 1 we had no groups yet
+    if (version == '1') {
+      var group = GroupModel("My Plants");
+      var plants = List<Map<String, dynamic>>.from(json['plants']);
+      for (var plantMap in plants) {
+        group.addPlant(PlantModel.fromJson(plantMap));
+      }
+      model.addGroup(group);
+    } else {
+      var groups = List<Map<String, dynamic>>.from(json['groups']);
+      for (var groupMap in groups) {
+        model.addGroup(GroupModel.fromJson(groupMap));
+      }
     }
     return model;
   }
