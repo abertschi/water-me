@@ -1,5 +1,8 @@
 ## 1.0.7+7 (work in progress)
--
+- Add option to import and export data.
+- Add default group for future group support feature.
+- Camera no longer creates temporary files but stores plants to app directory.
+- Padding changes in plant details.
 
 ## 1.0.6+6
 - Fix issue on Android 7 with crash due to notification misconfig
