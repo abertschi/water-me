@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:water_me/app_context.dart';
 import 'package:water_me/models/plant_model.dart';
 import 'package:water_me/screens/plant_edit.dart';
 import 'package:water_me/screens/plant_list_entry.dart';
 import 'package:water_me/theme.dart';
 
+import '../main.dart';
 import '../models/app_model.dart';
 
 class MyPlants extends StatelessWidget {
@@ -16,7 +19,8 @@ class MyPlants extends StatelessWidget {
       child:
           Column(mainAxisAlignment: MainAxisAlignment.start, children: const [
         SizedBox(height: 100.0),
-        Icon(Icons.water_drop_outlined, color: Color.fromRGBO(255, 255, 255, 1), size: 150),
+        Icon(Icons.water_drop_outlined,
+            color: Color.fromRGBO(255, 255, 255, 1), size: 150),
         SizedBox(height: 30.0),
         Padding(
             padding: EdgeInsets.only(left: 50.0, right: 50.0),
@@ -52,23 +56,122 @@ class MyPlants extends StatelessWidget {
         backgroundColor: c1,
         title: const Text("Plants"),
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () async {
-              PlantModel p = PlantModel("", 0);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChangeNotifierProvider.value(
-                        value: p,
-                        builder: (c, child) {
-                          return EditPlant(editMode: EditMode.add);
-                        })),
-              );
-            },
-          )
+          PopupMenuButton(
+              icon: const Icon(Icons.add),
+              itemBuilder: (context) {
+                return [
+                  const PopupMenuItem<int>(value: 0, child: Text("New Plant")),
+                  // const PopupMenuItem<int>(value: 1, child: Text("New Group")),
+                ];
+              },
+              onSelected: (value) {
+                if (value == 0) {
+                  PlantModel p = PlantModel("", 0);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider.value(
+                              value: p,
+                              builder: (c, child) {
+                                return EditPlant(editMode: EditMode.add);
+                              })));
+                } else if (value == 1) {
+                } else {
+                  print("unknown selection: $value");
+                }
+              }),
+          PopupMenuButton(
+              // icon: Icon(Icons.book)
+              itemBuilder: (context) {
+            return [
+              const PopupMenuItem<int>(
+                value: 0,
+                child: Text("Export Plants"),
+              ),
+              const PopupMenuItem<int>(
+                value: 1,
+                child: Text("Import Plants"),
+              ),
+              // const PopupMenuItem<int>(
+              //   value: 2,
+              //   child: Text("Notification Time"),
+              // ),
+              // const PopupMenuItem<int>(
+              //   value: 3,
+              //   child: Text("About"),
+              // ),
+            ];
+          }, onSelected: (value) {
+            if (value == 0) {
+              onExportJson(context);
+            } else if (value == 1) {
+              onImportJson(context);
+            } else if (value == 2) {
+            } else if (value == 3) {
+            } else {}
+          }),
         ],
       );
+
+  onImportJson(BuildContext context) async {
+    final appCtx = Provider.of<AppContext>(context, listen: false);
+
+    importData(BuildContext context) async {
+      if (await Permission.storage.request().isGranted) {
+        try {
+          final file = await appCtx.importModelFromFile();
+          print(file);
+          RestartWidget.restartApp(context);
+        } on Exception catch (e) {
+          onShowStatusMessage(
+              context, "Failed to import json: ${e.toString()}");
+          rethrow;
+        }
+      }
+    }
+
+    var exportPath = await appCtx.exportPath();
+    var exportBackup = await appCtx.exportBackupPath();
+    showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: const Text('Importing Plant Data'),
+              content: Text('This will overwrite your plants '
+                  'with import data from: \n\n$exportPath\n\n A backup '
+                  'will be created at: \n\n$exportBackup'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () async => {
+                    await importData(context),
+                  },
+                  child: const Text('Proceed'),
+                ),
+              ],
+            ));
+  }
+
+  onExportJson(BuildContext context) async {
+    final appCtx = Provider.of<AppContext>(context, listen: false);
+    if (await Permission.storage.request().isGranted) {
+      try {
+        final file = await appCtx.exportModelToFile();
+        onShowStatusMessage(context, "Exported to ${file.path}");
+      } on Exception catch (e) {
+        onShowStatusMessage(context, "Failed to export json: ${e.toString()}");
+        rethrow;
+      }
+    }
+  }
+
+  onShowStatusMessage(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        duration: const Duration(milliseconds: 7000), content: Text(message)));
+  }
 
   @override
   Widget build(BuildContext context) {
