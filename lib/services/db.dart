@@ -14,23 +14,28 @@ class Db {
     return _model;
   }
 
-  Future<String> get exportPath async {
+  Future<String> get exportDbFilePath async {
     final directory = await getExternalStorageDirectory();
     return "${directory!.path}/water_me.json";
   }
 
-  Future<String> get exportBackupPath async {
+  Future<String> get exportImageDirectoryPath async {
+    final directory = await getExternalStorageDirectory();
+    return directory!.path;
+  }
+
+  Future<String> get exportDbBackupPath async {
     final directory = await getExternalStorageDirectory();
     return "${directory!.path}/water_me.backup.json";
   }
 
   Future<File> get exportFile async {
-    final path = await exportPath;
+    final path = await exportDbFilePath;
     return File(path!);
   }
 
   Future<File> get exportBackupFile async {
-    final path = await exportBackupPath;
+    final path = await exportDbBackupPath;
     return File(path!);
   }
 

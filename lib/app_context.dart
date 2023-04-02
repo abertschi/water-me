@@ -43,11 +43,11 @@ class AppContext {
   }
 
   exportPath() {
-    return db.exportBackupPath;
+    return db.exportDbBackupPath;
   }
 
   exportBackupPath() {
-    return db.exportBackupPath;
+    return db.exportDbBackupPath;
   }
 
   // returns backup file or exception
