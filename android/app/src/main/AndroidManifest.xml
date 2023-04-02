@@ -7,6 +7,9 @@
             android:name="android.permission.RECORD_AUDIO"
             tools:node="remove" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <uses-permission
             android:name="android.permission.ACCESS_NETWORK_STATE"
             tools:node="remove" />
@@ -16,6 +19,7 @@
             android:icon="@mipmap/ic_launcher"
             android:label="Water Me">
         <activity
+                android:screenOrientation="portrait"
                 android:name=".MainActivity"
                 android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
                 android:exported="true"
@@ -40,5 +44,10 @@
         <meta-data
                 android:name="flutterEmbedding"
                 android:value="2" />
+
+
+      <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+          android:exported="true">
+      </receiver>
     </application>
 </manifest>

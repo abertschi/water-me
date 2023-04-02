@@ -1,28 +1,51 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
+import 'package:water_me/models/group_model.dart';
 import 'package:water_me/models/plant_model.dart';
 
 class AppModel extends ChangeNotifier {
-  List<PlantModel> _plants = [];
+  List<GroupModel> _groups = [];
 
-  set plants(List<PlantModel> l) {
-    _plants = l;
+  static emptyModel() {
+    GroupModel group = GroupModel("My plants");
+    return group;
+  }
+
+  GroupModel get defaultGroup {
+    if (_groups.isEmpty) {
+      addGroup(GroupModel("My plants"));
+    }
+    return _groups[0];
+  }
+
+  set groups(List<GroupModel> l) {
+    _groups = l;
     notifyListeners();
   }
 
-  List<PlantModel> get plants => plantsOrderedByWatering;
+  List<GroupModel> get groups {
+    return _groups;
+  }
+
+  List<PlantModel> get allPlants {
+    return _groups.expand((g) => g.plants).toList();
+  }
 
   List<PlantModel> get plantsOrderedByWatering {
-    _plants.sort((a, b) {
+    var p = allPlants;
+    p.sort((a, b) {
       return a.daysUntilNextWatering().compareTo(b.daysUntilNextWatering());
     });
-    return _plants;
+    return p;
   }
 
   int plantsToWater() {
-    return _plants.where((p) => p.isWateringDue()).toList().length;
+    return allPlants.where((p) => p.isWateringDue()).toList().length;
   }
+
   bool isWateringDue() {
-    for (var p in _plants) {
+    for (var p in allPlants) {
       if (p.isWateringDue()) {
         return true;
       }
@@ -30,10 +53,10 @@ class AppModel extends ChangeNotifier {
     return false;
   }
 
-  void addPlant(PlantModel p) {
-    _plants.add(p);
+  void addGroup(GroupModel g) {
+    _groups.add(g);
     notifyListeners();
-    p.addListener(notifyParent);
+    g.addListener(notifyParent);
   }
 
   void notifyParent() {
@@ -43,25 +66,46 @@ class AppModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removePlant(PlantModel p) {
-    _plants.remove(p);
-    notifyListeners();
-    p.removeListener(notifyParent);
+  // workaround until group feature implemented
+  List<PlantModel> get plants => allPlants;
+
+  void addPlant(PlantModel m) {
+    defaultGroup.addPlant(m);
+  }
+
+  removePlant(PlantModel m) {
+    defaultGroup.removePlant(m);
   }
 
   static AppModel fromJson(Map<String, dynamic> json) {
     AppModel model = AppModel();
-    var plants = List<Map<String, dynamic>>.from(json['plants']);
-    for (var plantMap in plants) {
-      model.addPlant(PlantModel.fromJson(plantMap));
+    var version = json['version'] ?? '';
+
+    // XXX: in version 1 we had no groups yet
+    if (version == '1') {
+      var group = GroupModel("My Plants");
+      var plants = List<Map<String, dynamic>>.from(json['plants']);
+      for (var plantMap in plants) {
+        group.addPlant(PlantModel.fromJson(plantMap));
+      }
+      model.addGroup(group);
+    } else {
+      var groups = List<Map<String, dynamic>>.from(json['groups']);
+      for (var groupMap in groups) {
+        model.addGroup(GroupModel.fromJson(groupMap));
+      }
     }
     return model;
   }
 
+  /*
+   * version 1: init
+   * version 2: group support
+   */
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['plants'] = plants.map((e) => e.toJson()).toList();
-    data['version'] = '1';
+    data['groups'] = groups.map((e) => e.toJson()).toList();
+    data['version'] = '2';
     return data;
   }
 }
