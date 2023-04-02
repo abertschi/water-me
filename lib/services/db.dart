@@ -56,7 +56,7 @@ class Db {
     var m = prefs.getString('model');
     if (m == null) {
       print('app model is null');
-      return AppModel();
+      return AppModel.emptyModel();
     } else {
       return AppModel.fromJson(json.decode(m));
     }
