@@ -30,6 +30,9 @@ _Water Me_ is available on the [F-droid store](https://f-droid.org/packages/ch.a
 Alternatively, download snapshots from the [continuous integration action](https://github.com/abertschi/water-me/actions/workflows/build.yml) (requires a Github account, be aware that Github zips the apk on download, so unzip first).
 
 
+### Changelog
+See [./CHANGELOG](./CHANGELOG) for a list of recent features.
+
 ### Build
 This is a flutter based Android application. Ensure to have Android-Studio and flutter-sdk installed.
 ```
