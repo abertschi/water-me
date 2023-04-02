@@ -33,6 +33,9 @@ Alternatively, download snapshots from the [continuous integration action](https
 ### Changelog
 See [./CHANGELOG](./CHANGELOG) for a list of recent features.
 
+### Need Help?
+See troupbleshooting guide for a list of common QnAs.
+
 ### Build
 This is a flutter based Android application. Ensure to have Android-Studio and flutter-sdk installed.
 ```
