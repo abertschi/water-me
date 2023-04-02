@@ -3,6 +3,7 @@
 - Add default group for future group support feature.
 - Camera no longer creates temporary files but stores plants to app directory.
 - Padding changes in plant details.
+- Drop support for landscape mode.
 
 ## 1.0.6+6
 - Fix issue on Android 7 with crash due to notification misconfig
