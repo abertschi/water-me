@@ -9,7 +9,9 @@ class AppModel extends ChangeNotifier {
 
   static emptyModel() {
     GroupModel group = GroupModel("My plants");
-    return group;
+    AppModel model = AppModel();
+    model._groups.add(group);
+    return model;
   }
 
   GroupModel get defaultGroup {

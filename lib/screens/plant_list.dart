@@ -1,11 +1,15 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:water_me/app_context.dart';
 import 'package:water_me/models/plant_model.dart';
 import 'package:water_me/screens/plant_edit.dart';
 import 'package:water_me/screens/plant_list_entry.dart';
 import 'package:water_me/theme.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../main.dart';
 import '../models/app_model.dart';
@@ -96,18 +100,51 @@ class MyPlants extends StatelessWidget {
               //   value: 2,
               //   child: Text("Notification Time"),
               // ),
-              // const PopupMenuItem<int>(
-              //   value: 3,
-              //   child: Text("About"),
-              // ),
+              const PopupMenuItem<int>(
+                value: 3,
+                child: Text("About"),
+              ),
             ];
-          }, onSelected: (value) {
+          }, onSelected: (value) async {
             if (value == 0) {
               onExportJson(context);
             } else if (value == 1) {
               onImportJson(context);
             } else if (value == 2) {
             } else if (value == 3) {
+              PackageInfo packageInfo = await PackageInfo.fromPlatform();
+              showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                      title: const Text('About'),
+                      content: RichText(
+                          text: TextSpan(
+                        children: [
+                          const TextSpan(
+                            style: TextStyle(color: Colors.black),
+                            text: "Water-Me is built by abertschi.\n\n",
+                          ),
+                          TextSpan(
+                            style: const TextStyle(color: Colors.black,
+                                decoration: TextDecoration.underline),
+                            text: "https://abertschi.ch\n\n",
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                const url = 'https://abertschi.ch?rel=water-me';
+                                await launchUrlString(url);
+                              },
+                          ),
+                          TextSpan(
+                            style: const TextStyle(color: Colors.black),
+                            text: "version ${packageInfo.version}",
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                const url = 'https://github.com/abertschi/water-me/blob/master/CHANGELOG';
+                                await launchUrlString(url);
+                              },
+                          ),
+                        ],
+                      ))));
             } else {}
           }),
         ],
