@@ -1,5 +1,7 @@
-## 1.0.8+8 (work in progress)
+## 1.0.8+8
+- Bugfix: Serialization issue when launched without existing user data
 - Add about popup
+- New logo: Many thanks to @7eter
 
 ## 1.0.7+7
 - Add option to import and export data.
