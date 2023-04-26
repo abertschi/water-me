@@ -1,5 +1,4 @@
-- Note, version 1.0.7 currently encounters a serialization issue when launched without existing user data, use version 1.0.6 until fixed.
-- Note, if you are good at [logo design](https://github.com/abertschi/water-me/issues/4) or [web design](https://github.com/abertschi/water-me/issues/9), please reach out and help me implement some of the [open tasks](https://github.com/abertschi/water-me/issues). Thank you!
+- Note, if you are good at [web design](https://github.com/abertschi/water-me/issues/9), please reach out and help me implement some of the [open tasks](https://github.com/abertschi/water-me/issues). Thank you!
 
 # Water Me 🪴
 
