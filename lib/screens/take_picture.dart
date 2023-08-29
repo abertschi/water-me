@@ -39,7 +39,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var button = buttonTemplate(
+    var buttonTakePicture = buttonTemplate(
         text: "TAKE PICTURE",
         onPressed: () async {
           try {
@@ -63,21 +63,30 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         });
 
     return Scaffold(
-      body: FutureBuilder<void>(
-        future: _initializeControllerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return SingleChildScrollView(child:  Column(children: [
-              CameraPreview(_controller),
-              const SizedBox(height: 40.0),
-              button
-            ]));
-          } else {
-            return const Center(child: CircularProgressIndicator(
-              color: Colors.white,
-            ));
-          }
-        },
+      body: Container(
+        margin: const EdgeInsets.fromLTRB(8, 32, 8, 16),
+        child: Column(
+          children: [
+            Flexible(
+              flex: 2,
+              child: FutureBuilder<void>(
+                future: _initializeControllerFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return CameraPreview(_controller);
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                }
+              )
+            ),
+            const SizedBox(height: 8),
+            Expanded(
+              flex: 0,
+              child: buttonTakePicture
+            ),
+          ],
+        ),
       ),
     );
   }
