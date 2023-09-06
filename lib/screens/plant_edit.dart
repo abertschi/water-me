@@ -5,7 +5,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:water_me/models/plant_model.dart';
 import 'package:water_me/screens/take_picture.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 import '../app_context.dart';
 import '../main.dart';
@@ -136,13 +135,9 @@ class _EditPlant extends State<EditPlant> {
           const SizedBox(height: 40.0),
           enterFrequency(context),
           const SizedBox(height: 40.0),
-          
-          // Plant pictures are currently only supported on Android / IOS.
-          // If desktop or web builds ever support pictures, this needs to be updated.
-          if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) buttonTemplate(
-            text: "TAKE PICTURE",
-            onPressed: () => onTakePicture(context, plant)
-          ),
+          buttonTemplate(
+              text: "TAKE PICTURE",
+              onPressed: () => onTakePicture(context, plant)),
           const SizedBox(height: 40.0),
           widget.editMode == EditMode.edit
               ? deleteButton(context, plant)
@@ -256,11 +251,7 @@ class _EditPlant extends State<EditPlant> {
         ),
       );
 
-  Widget? takePicture(BuildContext context) {
-    // Support for taking pictures is only available for android / ios builds.
-    // If desktop or web-server builds ever support pictures, this needs to be updated.
-    if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
-      return Container(
+  Widget takePicture(BuildContext context) => Container(
         padding: const EdgeInsets.all(20.0),
         decoration: BoxDecoration(
             border: Border.all(color: Colors.white),
@@ -270,8 +261,4 @@ class _EditPlant extends State<EditPlant> {
           style: TextStyle(color: Colors.white, fontSize: 30.0),
         ),
       );
-    } else {
-      return null;
-    }
-  }
 }
