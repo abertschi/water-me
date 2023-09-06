@@ -1,13 +1,13 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
 import '../theme.dart';
 
 class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
+  final Uint8List imageBytes;
 
-  const DisplayPictureScreen({super.key, required this.imagePath});
+  const DisplayPictureScreen({super.key, required this.imageBytes});
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +16,13 @@ class DisplayPictureScreen extends StatelessWidget {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-          Image.file(File(imagePath)),
+          Image.memory(imageBytes),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 50),
               child: Center(
                 child: buttonTemplate(
                     text: "SAVE PICTURE",
-                    onPressed: () => {Navigator.pop(context, imagePath)}),
+                    onPressed: () => {Navigator.pop(context, imageBytes)}),
               ))
         ])));
   }
