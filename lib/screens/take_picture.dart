@@ -23,11 +23,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = CameraController(
-      widget.camera,
-      ResolutionPreset.high,
-      enableAudio: false
-    );
+    _controller = CameraController(widget.camera, ResolutionPreset.high,
+        enableAudio: false);
     _initializeControllerFuture = _controller.initialize();
   }
 
@@ -45,12 +42,15 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           try {
             await _initializeControllerFuture;
 
-            final image = await _controller.takePicture();
+            final imageBytes = await _controller
+                .takePicture()
+                .then((value) => value.readAsBytes());
+
             if (!mounted) return;
             final res = await Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => DisplayPictureScreen(
-                  imagePath: image.path,
+                  imageBytes: imageBytes,
                 ),
               ),
             );
@@ -67,13 +67,15 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return SingleChildScrollView(child:  Column(children: [
+            return SingleChildScrollView(
+                child: Column(children: [
               CameraPreview(_controller),
               const SizedBox(height: 40.0),
               button
             ]));
           } else {
-            return const Center(child: CircularProgressIndicator(
+            return const Center(
+                child: CircularProgressIndicator(
               color: Colors.white,
             ));
           }

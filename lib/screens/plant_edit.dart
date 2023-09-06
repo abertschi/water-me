@@ -1,13 +1,11 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:water_me/models/plant_model.dart';
 import 'package:water_me/screens/take_picture.dart';
 
 import '../app_context.dart';
-import '../main.dart';
 import '../theme.dart';
 
 enum EditMode { add, edit }
@@ -88,22 +86,14 @@ class _EditPlant extends State<EditPlant> {
 
   onTakePicture(BuildContext context, PlantModel plant) async {
     var c = Provider.of<AppContext>(context, listen: false).camera!;
-    var appCtx = Provider.of<AppContext>(context, listen: false);
+
     final image = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TakePictureScreen(camera: c)),
     );
-    if (image != null && image is String) {
-      if (await Permission.storage.request().isGranted) {
-        String directory = await appCtx.db.exportImageDirectoryPath;
-        String name = "$directory/" +
-            "${DateTime.now().toIso8601String().replaceAll(":", "_")}.jpg";
-        File newImage = await File(image).copy(name);
-        plant.image = newImage.path;
-      } else {
-        plant.image = image;
-      }
-      print(plant.image);
+
+    if (image != null && image is Uint8List && image.isNotEmpty) {
+      plant.image = image;
     }
   }
 
@@ -153,7 +143,7 @@ class _EditPlant extends State<EditPlant> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: FileImage(File(plant.image!)),
+              image: MemoryImage(plant.image!),
               fit: BoxFit.cover,
             ),
           ));

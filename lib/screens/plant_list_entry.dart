@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:water_me/screens/plant_show.dart';
@@ -126,7 +124,7 @@ class PlantListEntry extends StatelessWidget {
           height: cardHeight,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: FileImage(File(plant.image!)),
+              image: MemoryImage(plant.image!),
               fit: BoxFit.cover,
             ),
           ));

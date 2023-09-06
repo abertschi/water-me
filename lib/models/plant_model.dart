@@ -1,10 +1,13 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/foundation.dart';
 
 class PlantModel extends ChangeNotifier {
   List<DateTime> _wateringHistory = [];
   late String _plantName;
   late int _wateringFrequency;
-  String? _image;
+  Uint8List? _image; // Image as Bytes
 
   PlantModel(String name, int wateringFreq) {
     _plantName = name;
@@ -30,7 +33,7 @@ class PlantModel extends ChangeNotifier {
   Duration _differenceBetweenDates(DateTime d1, DateTime d2) {
     var _d1 = DateTime(d1.year, d1.month, d1.day);
     var _d2 = DateTime(d2.year, d2.month, d2.day);
-    return  _d1.difference(_d2);
+    return _d1.difference(_d2);
   }
 
   int daysUntilNextWatering() {
@@ -75,9 +78,9 @@ class PlantModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  String? get image => _image;
+  Uint8List? get image => _image;
 
-  set image(String? i) {
+  set image(Uint8List? i) {
     _image = i;
     notifyListeners();
   }
@@ -93,7 +96,10 @@ class PlantModel extends ChangeNotifier {
     PlantModel p = PlantModel("", 0);
     p.plantName = plantMap['name'] ?? '';
     p.wateringFrequency = plantMap['frequency'] ?? 7;
-    p.image = plantMap['image'] ?? '';
+
+    var encodedImage = plantMap['image'];
+    if (encodedImage != null) p.image = base64Decode(encodedImage);
+
     var hist = List<String>.from(plantMap['watinergHistory'] ?? []);
     p.wateringHistory = hist.map((e) => DateTime.parse(e)).toList();
     return p;
@@ -103,7 +109,7 @@ class PlantModel extends ChangeNotifier {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = plantName;
     data['frequency'] = wateringFrequency;
-    data['image'] = image;
+    if (image != null) data['image'] = base64Encode(image!);
     data['watinergHistory'] = wateringHistory.map((e) => e.toString()).toList();
     return data;
   }

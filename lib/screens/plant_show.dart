@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:water_me/models/app_model.dart';
@@ -107,7 +105,7 @@ class ShowPlant extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: FileImage(File(plant.image!)),
+              image: MemoryImage(plant.image!),
               fit: BoxFit.cover,
             ),
           ));
