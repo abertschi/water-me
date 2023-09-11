@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'dart:math';
+
+import 'package:timeago/timeago.dart' as timeago;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +39,11 @@ class ShowPlant extends StatelessWidget {
         color: Color.fromRGBO(243, 243, 243, 1.0),
         fontSize: 21.0);
 
+    const descTextSmall = TextStyle(
+        fontWeight: FontWeight.normal,
+        color: Color.fromRGBO(243, 243, 243, 1.0),
+        fontSize: 18.0);
+
     final topText = SingleChildScrollView(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,15 +58,11 @@ class ShowPlant extends StatelessWidget {
         Text(
           plant.plantName,
           textAlign: TextAlign.center,
-          style: const TextStyle(color: Colors.white, fontSize: 50.0,),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 50.0,
+          ),
         ),
-        const SizedBox(height: 60.0),
-        const Padding(
-            padding: EdgeInsets.only(left: 10.0),
-            child: Divider(
-              color: Color.fromRGBO(255, 255, 255, 0.76),
-              thickness: 1.0,
-            )),
         const SizedBox(height: 30.0),
         Padding(
           padding: const EdgeInsets.only(left: 10.0),
@@ -84,19 +88,42 @@ class ShowPlant extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10.0, top: 20.0),
             child:
                 buildWateredText(context, plant, descTextSize, descTextBold)),
-        const SizedBox(height: 30.0),
+        const SizedBox(height: 60.0),
+        Padding(
+            padding: const EdgeInsets.only(bottom: 60.0),
+            child: buttonTemplate(
+                text: "WATER NOW",
+                onPressed: () => onWatering(context, plant))),
         const Padding(
             padding: EdgeInsets.only(left: 10.0),
             child: Divider(
               color: Color.fromRGBO(255, 255, 255, 0.7607843137254902),
               thickness: 1.0,
             )),
-        const SizedBox(height: 60.0),
-        Padding(
-            padding: const EdgeInsets.only(bottom: 100.0),
-            child: buttonTemplate(
-                text: "WATER NOW",
-                onPressed: () => onWatering(context, plant))),
+        const SizedBox(height: 30.0),
+        const Text(
+          "History",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 40.0,
+          ),
+        ),
+        Container(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: min(plant.wateringHistory.length, 5),
+                itemBuilder: (BuildContext context, int index) {
+                  var last = plant.wateringHistory.length - index - 1;
+                  return Container(
+                      padding: const EdgeInsets.only(bottom: 5.0),
+                      child: Text(
+                        "\u2022  watered ${timeago.format(plant.wateringHistory[last])}",
+                        style: descTextSmall,
+                      ));
+                })),
       ],
     ));
 
@@ -152,7 +179,7 @@ class ShowPlant extends StatelessWidget {
 
   buildWateredText(BuildContext context, PlantModel plant,
       TextStyle descTextSize, TextStyle descTextBold) {
-    if (plant.daysSinceLastWatered() != null) {
+    if (plant.lastWatered() != null) {
       return Row(
         children: [
           Text(
@@ -166,13 +193,9 @@ class ShowPlant extends StatelessWidget {
                 border: Border.all(color: Colors.white),
                 borderRadius: BorderRadius.circular(5.0)),
             child: Text(
-              "${plant.daysSinceLastWatered()} days",
+              timeago.format(plant.lastWatered() as DateTime),
               style: descTextBold,
             ),
-          ),
-          Text(
-            " ago",
-            style: descTextSize,
           ),
         ],
       );
