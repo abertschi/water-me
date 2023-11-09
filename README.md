@@ -1,5 +1,3 @@
-- Note, if you are good at [web design](https://github.com/abertschi/water-me/issues/9), please reach out and help me implement some of the [open tasks](https://github.com/abertschi/water-me/issues). Thank you!
-
 # Water Me 🪴
 
 > A simple, open and privacy friendly plant watering reminder for Android.
