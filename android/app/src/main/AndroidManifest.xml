@@ -47,7 +47,8 @@
 
 
       <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
-          android:exported="true">
+          android:exported="true"
+          tools:replace="android:exported">
       </receiver>
     </application>
 </manifest>

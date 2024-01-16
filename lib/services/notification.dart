@@ -34,13 +34,13 @@ class NotificationService {
 
   final AndroidNotificationDetails _androidNotificationDetails =
       const AndroidNotificationDetails(
-    '1',
-    'water_me',
-    'water notification',
-    playSound: true,
-    priority: Priority.high,
-    importance: Importance.high,
-  );
+      '1',
+      'water_me',
+      channelDescription: 'water notification',
+      playSound: true,
+      priority: Priority.high,
+      importance: Importance.high,
+    );
 
   Future<void> showWateringNotification(int plantsToWater) async {
     await flutterLocalNotificationsPlugin.show(
