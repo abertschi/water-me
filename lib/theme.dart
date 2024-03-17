@@ -27,7 +27,6 @@ final appTheme = ThemeData(
     fontFamily: 'Raleway',
     colorScheme: ColorScheme.fromSwatch(
       primarySwatch: materialColor,
-      primaryColorDark: c1,
       accentColor: c1,
       backgroundColor: c1,
       errorColor: Colors.white,
