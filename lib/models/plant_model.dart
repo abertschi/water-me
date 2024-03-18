@@ -4,11 +4,13 @@ class PlantModel extends ChangeNotifier {
   List<DateTime> _wateringHistory = [];
   late String _plantName;
   late int _wateringFrequency;
+  late String _wateringMethod;
   String? _image;
 
   PlantModel(String name, int wateringFreq) {
     _plantName = name;
     _wateringFrequency = wateringFreq;
+    _wateringMethod = "";
   }
 
   get hasImage {
@@ -50,6 +52,18 @@ class PlantModel extends ChangeNotifier {
     _plantName = p;
     notifyListeners();
   }
+
+  String get wateringMethod => _wateringMethod;
+
+  set wateringMethod(String wm) {
+    _wateringMethod = wm;
+    notifyListeners();
+  }
+
+  get hasWateringMethod {
+    return _wateringMethod.isNotEmpty;
+  }
+
 
   List<DateTime> get wateringHistory => _wateringHistory;
 
@@ -94,6 +108,7 @@ class PlantModel extends ChangeNotifier {
     p.plantName = plantMap['name'] ?? '';
     p.wateringFrequency = plantMap['frequency'] ?? 7;
     p.image = plantMap['image'] ?? '';
+    p.wateringMethod = plantMap['wateringMethod'] ?? "";
     var hist = List<String>.from(plantMap['watinergHistory'] ?? []);
     p.wateringHistory = hist.map((e) => DateTime.parse(e)).toList();
     return p;
@@ -104,6 +119,7 @@ class PlantModel extends ChangeNotifier {
     data['name'] = plantName;
     data['frequency'] = wateringFrequency;
     data['image'] = image;
+    data['wateringMethod'] = wateringMethod;
     data['watinergHistory'] = wateringHistory.map((e) => e.toString()).toList();
     return data;
   }

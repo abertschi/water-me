@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:water_me/models/plant_model.dart';
+import 'package:water_me/models/watering_methods.dart';
 import 'package:water_me/screens/take_picture.dart';
 
 import '../app_context.dart';
-import '../main.dart';
 import '../theme.dart';
 
 enum EditMode { add, edit }
@@ -25,9 +25,12 @@ class EditPlant extends StatefulWidget {
 
 class _EditPlant extends State<EditPlant> {
   late TextEditingController plantNameCtrl;
+  late TextEditingController wateringMethodCtrl;
   late TextEditingController frequencyCtrl;
+  final textStyleDefault = const TextStyle(fontSize: 20, color: Colors.white);
   final formKey = GlobalKey<FormState>();
-  var roundedBorder = OutlineInputBorder(borderSide: BorderSide(color: Colors.white));
+  var roundedBorder =
+      OutlineInputBorder(borderSide: BorderSide(color: Colors.white));
 
   _EditPlant();
 
@@ -35,9 +38,14 @@ class _EditPlant extends State<EditPlant> {
   void initState() {
     super.initState();
     final plant = Provider.of<PlantModel>(context, listen: false);
-    plantNameCtrl = TextEditingController(text: plant.plantName ?? "");
+    plantNameCtrl = TextEditingController(text: plant.plantName);
     plantNameCtrl.addListener(() {
       plant.plantName = plantNameCtrl.text;
+    });
+
+    wateringMethodCtrl = TextEditingController(text: plant.wateringMethod);
+    wateringMethodCtrl.addListener(() {
+      plant.wateringMethod = wateringMethodCtrl.text;
     });
 
     frequencyCtrl =
@@ -52,6 +60,7 @@ class _EditPlant extends State<EditPlant> {
     super.dispose();
     plantNameCtrl.dispose();
     frequencyCtrl.dispose();
+    wateringMethodCtrl.dispose();
   }
 
   @override
@@ -127,20 +136,22 @@ class _EditPlant extends State<EditPlant> {
         const Icon(
           Icons.water_drop_outlined,
           color: Colors.white,
-          size: 80.0,
+          size: 40.0,
         ),
         const SizedBox(height: 40.0),
         Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          enterName(context),
+          enterText(context, "ENTER NAME", plantNameCtrl, false),
           const SizedBox(height: 40.0),
           enterFrequency(context),
+          const SizedBox(height: 40.0),
+          enterWateringMethod(context, plant),
           const SizedBox(height: 40.0),
           buttonTemplate(
               text: "TAKE PICTURE",
               onPressed: () => onTakePicture(context, plant)),
           const SizedBox(height: 40.0),
           widget.editMode == EditMode.edit
-              ? deleteButton(context, plant)
+              ? Container()
               : saveButton(context, plant),
         ])
       ],
@@ -186,14 +197,28 @@ class _EditPlant extends State<EditPlant> {
     ));
   }
 
-  Widget enterName(BuildContext context) => Container(
+  DropdownMenuItem<String> paddedItem(String value, String text,
+          {IconData? icon = null}) =>
+      DropdownMenuItem(
+          value: value,
+          child: Container(
+              padding: const EdgeInsets.only(bottom: 5.0),
+              width: MediaQuery.of(context).size.width,
+              child: Text(text, style: textStyleDefault)));
+
+  Widget enterText(BuildContext context, String labelText,
+          TextEditingController controller, bool allowEmpty) =>
+      Container(
         margin: const EdgeInsets.only(left: 25.0, right: 25.0),
         child: TextFormField(
-          controller: plantNameCtrl,
+          controller: controller,
           textAlign: TextAlign.left,
           keyboardType: TextInputType.name,
           textCapitalization: TextCapitalization.sentences,
           validator: (v) {
+            if (allowEmpty) {
+              return null;
+            }
             if (v == null || v.trim().isEmpty) {
               return "Can't be empty";
             } else {
@@ -201,10 +226,10 @@ class _EditPlant extends State<EditPlant> {
             }
           },
           decoration: InputDecoration(
-            labelText: "ENTER NAME",
+            labelText: labelText,
             errorStyle: TextStyle(color: Colors.white),
-            suffixStyle: TextStyle(color: Colors.white, fontSize: 20.0),
-            labelStyle: TextStyle(color: Colors.white, fontSize: 20.0),
+            suffixStyle: textStyleDefault,
+            labelStyle: textStyleDefault,
             border: roundedBorder,
             focusedErrorBorder: roundedBorder,
             errorBorder: roundedBorder,
@@ -212,9 +237,21 @@ class _EditPlant extends State<EditPlant> {
             focusedBorder: roundedBorder,
             fillColor: Colors.white,
           ),
-          style: const TextStyle(color: Colors.white, fontSize: 20.0),
+          style: textStyleDefault,
         ),
       );
+
+  Widget enterWateringMethod(BuildContext context, PlantModel plant) =>
+      DropdownButtonFormField(
+          style: textStyleDefault,
+          isExpanded: true,
+          hint: Text("Select watering method", style: textStyleDefault),
+          onChanged: (String? value) {
+            plant.wateringMethod = value?.toString() ?? "";
+          },
+          items: WateringModes.wateringModes
+              .map((e) => paddedItem(e.key, e.text))
+              .toList());
 
   Widget enterFrequency(BuildContext context) => Container(
         margin: const EdgeInsets.only(left: 25.0, right: 25.0),
@@ -238,8 +275,8 @@ class _EditPlant extends State<EditPlant> {
             suffixText: "days ",
             labelText: "FREQUENCY",
             errorStyle: TextStyle(color: Colors.white),
-            suffixStyle: TextStyle(color: Colors.white, fontSize: 20.0),
-            labelStyle: TextStyle(color: Colors.white, fontSize: 20.0),
+            suffixStyle: textStyleDefault,
+            labelStyle: textStyleDefault,
             border: roundedBorder,
             focusedErrorBorder: roundedBorder,
             errorBorder: roundedBorder,
