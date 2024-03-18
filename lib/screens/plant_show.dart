@@ -6,6 +6,7 @@ import 'package:water_me/models/app_model.dart';
 import 'package:water_me/models/plant_model.dart';
 import 'package:water_me/theme.dart';
 
+import '../models/watering_methods.dart';
 import 'plant_edit.dart';
 
 class ShowPlant extends StatelessWidget {
@@ -29,7 +30,7 @@ class ShowPlant extends StatelessWidget {
     final plant = Provider.of<PlantModel>(context);
 
     const descTextSize =
-        TextStyle(color: Color.fromRGBO(243, 243, 243, 1.0), fontSize: 21.0);
+    TextStyle(color: Color.fromRGBO(243, 243, 243, 1.0), fontSize: 21.0);
 
     const descTextBold = TextStyle(
         fontWeight: FontWeight.bold,
@@ -38,73 +39,80 @@ class ShowPlant extends StatelessWidget {
 
     final topText = SingleChildScrollView(
         child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        // const SizedBox(height: 60.0),
-        // const Icon(
-        //   Icons.water_drop_outlined,
-        //   color: Colors.white,
-        //   size: 60.0,
-        // ),
-        // const SizedBox(height: 30.0),
-        Text(
-          plant.plantName,
-          textAlign: TextAlign.center,
-          style: const TextStyle(color: Colors.white, fontSize: 50.0,),
-        ),
-        const SizedBox(height: 60.0),
-        const Padding(
-            padding: EdgeInsets.only(left: 10.0),
-            child: Divider(
-              color: Color.fromRGBO(255, 255, 255, 0.76),
-              thickness: 1.0,
-            )),
-        const SizedBox(height: 30.0),
-        Padding(
-          padding: const EdgeInsets.only(left: 10.0),
-          child: Row(children: [
-            const Text(
-              "water ",
-              style: descTextSize,
-            ),
-            Container(
-              // padding: const EdgeInsets.all(7.0),
-              padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.circular(5.0)),
-              child: Text(
-                "every ${plant.wateringFrequency} days",
-                style: descTextBold,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            // const SizedBox(height: 60.0),
+            // const Icon(
+            //   Icons.water_drop_outlined,
+            //   color: Colors.white,
+            //   size: 60.0,
+            // ),
+            // const SizedBox(height: 30.0),
+            Text(
+              plant.plantName,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 50.0,
               ),
             ),
-          ]),
-        ),
-        Padding(
-            padding: const EdgeInsets.only(left: 10.0, top: 20.0),
-            child:
+            const SizedBox(height: 60.0),
+            const Padding(
+                padding: EdgeInsets.only(left: 10.0),
+                child: Divider(
+                  color: Color.fromRGBO(255, 255, 255, 0.76),
+                  thickness: 1.0,
+                )),
+            const SizedBox(height: 30.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: Row(children: [
+                const Text(
+                  "water ",
+                  style: descTextSize,
+                ),
+                Container(
+                  // padding: const EdgeInsets.all(7.0),
+                  padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  child: Text(
+                    "every ${plant.wateringFrequency} days",
+                    style: descTextBold,
+                  ),
+                ),
+              ]),
+            ),
+            Padding(
+                padding: const EdgeInsets.only(left: 10.0, top: 20.0),
+                child:
                 buildWateredText(context, plant, descTextSize, descTextBold)),
-        const SizedBox(height: 30.0),
-        const Padding(
-            padding: EdgeInsets.only(left: 10.0),
-            child: Divider(
-              color: Color.fromRGBO(255, 255, 255, 0.7607843137254902),
-              thickness: 1.0,
-            )),
-        const SizedBox(height: 60.0),
-        Padding(
-            padding: const EdgeInsets.only(bottom: 100.0),
-            child: buttonTemplate(
-                text: "WATER NOW",
-                onPressed: () => onWatering(context, plant))),
-      ],
-    ));
+            buildWateringMethod(context, plant, descTextSize, descTextBold),
+            const SizedBox(height: 30.0),
+            const Padding(
+                padding: EdgeInsets.only(left: 10.0),
+                child: Divider(
+                  color: Color.fromRGBO(255, 255, 255, 0.7607843137254902),
+                  thickness: 1.0,
+                )),
+            const SizedBox(height: 60.0),
+            Padding(
+                padding: const EdgeInsets.only(bottom: 100.0),
+                child: buttonTemplate(
+                    text: "WATER NOW",
+                    onPressed: () => onWatering(context, plant))),
+          ],
+        ));
 
     Widget image = const Text("");
     if (plant.image != null && plant.image!.isNotEmpty) {
       image = Container(
           padding: const EdgeInsets.only(left: 10.0),
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: FileImage(File(plant.image!)),
@@ -117,12 +125,18 @@ class ShowPlant extends StatelessWidget {
       children: <Widget>[
         image,
         Container(
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height,
           padding: const EdgeInsets.only(
               top: 0.0, right: 40.0, left: 40.0, bottom: 10.0),
-          width: MediaQuery.of(context).size.width,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width,
           decoration:
-              const BoxDecoration(color: Color.fromRGBO(49, 73, 60, 0.6)),
+          const BoxDecoration(color: Color.fromRGBO(49, 73, 60, 0.6)),
           child: Center(
             child: topText,
           ),
@@ -148,6 +162,38 @@ class ShowPlant extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  buildWateringMethod(BuildContext context, PlantModel plant,
+      TextStyle descTextSize, TextStyle descTextBold) {
+    if (plant.hasWateringMethod) {
+      WateringMode? wm = WateringModes.get(plant.wateringMethod);
+      var text = Text(wm?.text ?? plant.wateringMethod, style: descTextSize);
+      IconData? icon = WateringModes
+          .get(plant.wateringMethod)
+          ?.icon;
+      late Widget child;
+      if (icon == null) {
+        child = text;
+      } else {
+        child = Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: Colors.white), // Your icon
+            SizedBox(width: 8), // Adjust the space between icon and text
+            Expanded(
+              child: text,
+            ),
+          ],
+        ); // Wrap(direction: Axis.vertical, alignment: , children: [, text]);
+      }
+
+      return Container(
+          padding: const EdgeInsets.only(left: 10.0, right: 5.0, top: 15),
+          child: child);
+    } else {
+      return Container();
+    }
   }
 
   buildWateredText(BuildContext context, PlantModel plant,
@@ -197,11 +243,12 @@ class ShowPlant extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ChangeNotifierProvider.value(
-                    value: plant,
-                    builder: (c, child) {
-                      return EditPlant(editMode: EditMode.edit);
-                    })),
+                builder: (context) =>
+                    ChangeNotifierProvider.value(
+                        value: plant,
+                        builder: (c, child) {
+                          return EditPlant(editMode: EditMode.edit);
+                        })),
           );
           break;
         case 'Delete':
